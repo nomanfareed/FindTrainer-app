@@ -10,6 +10,9 @@ namespace FindTrainer.Application
         {
             CreateMap<CertificationForCreationDto, Certification>();
             CreateMap<Certification, CertificationForReturnDto>();
+
+            CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<Photo, PhotoForReturnDto>();
         }
     }
 }
