@@ -46,10 +46,10 @@ namespace FindTrainer.Persistence
 
             builder.Entity<ApplicationUser>().Property(x => x.Gender).IsRequired();
             builder.Entity<ApplicationUser>().Property(x => x.IsTrainer).IsRequired();
-            builder.Entity<ApplicationUser>().Property(x => x.KnownAs).IsRequired();
+            builder.Entity<ApplicationUser>().Property(x => x.KnownAs).IsRequired(false);
             builder.Entity<ApplicationUser>().Property(x => x.Created).IsRequired();
             builder.Entity<ApplicationUser>().Property(x => x.LastActive).IsRequired();
-            builder.Entity<ApplicationUser>().Property(x => x.Introduction).IsRequired();
+            builder.Entity<ApplicationUser>().Property(x => x.Introduction).IsRequired(false);
             builder.Entity<ApplicationUser>().Property(x => x.AdsBidding).IsRequired();
             builder.Entity<ApplicationUser>().HasMany(x => x.ReviewsReceived).WithOne(x => x.RecipientUser).HasForeignKey(x => x.RecipientId);
             builder.Entity<ApplicationUser>().HasMany(x => x.ReviewsSent).WithOne(x => x.Sender).HasForeignKey(x => x.SenderId);
@@ -76,20 +76,6 @@ namespace FindTrainer.Persistence
             builder.Entity<Address>().Property(x => x.Province).IsRequired();
 
             builder.Entity<ApplicationUser>().HasOne(x => x.Address).WithOne().HasForeignKey<ApplicationUser>(x => x.AddressId);
-
-            var hasher = new PasswordHasher<ApplicationUser>();
-            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
-            {
-                Id = 1,
-                
-                UserName = "admin@x.com",
-                NormalizedUserName = "admin@x.com".ToUpper(),
-                Email = "admin@x.com",
-                NormalizedEmail = "admin@x.com".ToUpper(),
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "admin"),
-                SecurityStamp = string.Empty
-            });
 
 
             builder.Entity<Certification>().Property(x => x.Description).IsRequired();
