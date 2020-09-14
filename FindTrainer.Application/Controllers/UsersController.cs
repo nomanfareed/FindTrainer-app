@@ -52,7 +52,7 @@ namespace FindTrainer.Application.Controllers
 
         private IQueryable<ApplicationUser> BuildUsersQuery(UserParams userParams)
         {
-            IQueryable<ApplicationUser> query = _usersQuery.Query.Where(u => u.IsTrainer && u.Id != UserId && (!userParams.Gender.HasValue || u.Gender == userParams.Gender.Value));
+            IQueryable<ApplicationUser> query = _usersQuery.Query.Where(u => u.IsTrainer.HasValue && u.IsTrainer.Value && u.Id != UserId && (!userParams.Gender.HasValue || u.Gender == userParams.Gender.Value));
             if (!string.IsNullOrEmpty(userParams.City))
             {
                 query = query.Where(u => u.Address != null && u.Address.City == userParams.City);

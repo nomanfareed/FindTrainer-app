@@ -44,13 +44,13 @@ namespace FindTrainer.Persistence
 
             }
 
-            builder.Entity<ApplicationUser>().Property(x => x.Gender).IsRequired();
-            builder.Entity<ApplicationUser>().Property(x => x.IsTrainer).IsRequired();
+            builder.Entity<ApplicationUser>().Property(x => x.Gender).IsRequired(false);
+            builder.Entity<ApplicationUser>().Property(x => x.IsTrainer).IsRequired(false);
             builder.Entity<ApplicationUser>().Property(x => x.KnownAs).IsRequired(false);
             builder.Entity<ApplicationUser>().Property(x => x.Created).IsRequired();
             builder.Entity<ApplicationUser>().Property(x => x.LastActive).IsRequired();
             builder.Entity<ApplicationUser>().Property(x => x.Introduction).IsRequired(false);
-            builder.Entity<ApplicationUser>().Property(x => x.AdsBidding).IsRequired();
+            builder.Entity<ApplicationUser>().Property(x => x.AdsBidding).IsRequired(false);
             builder.Entity<ApplicationUser>().HasMany(x => x.ReviewsReceived).WithOne(x => x.RecipientUser).HasForeignKey(x => x.RecipientId);
             builder.Entity<ApplicationUser>().HasMany(x => x.ReviewsSent).WithOne(x => x.Sender).HasForeignKey(x => x.SenderId);
 

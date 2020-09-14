@@ -68,7 +68,7 @@ namespace FindTrainer.Application.Controllers
                 return BadRequest("User does not exist");
             }
 
-            if(!user.IsTrainer)
+            if(!user.IsTrainer.HasValue || !user.IsTrainer.Value)
             {
                 return BadRequest("Invalid trainer ID");
             }

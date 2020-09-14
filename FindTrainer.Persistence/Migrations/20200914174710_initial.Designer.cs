@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FindTrainer.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200914114706_initail")]
-    partial class initail
+    [Migration("20200914174710_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,10 +205,10 @@ namespace FindTrainer.Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AdsBidding")
+                    b.Property<int?>("AdsBidding")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -225,13 +225,13 @@ namespace FindTrainer.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Gender")
+                    b.Property<int?>("Gender")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Introduction")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsTrainer")
+                    b.Property<bool?>("IsTrainer")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("KnownAs")
@@ -263,7 +263,7 @@ namespace FindTrainer.Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PhotoId")
+                    b.Property<int?>("PhotoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
@@ -436,15 +436,11 @@ namespace FindTrainer.Persistence.Migrations
                 {
                     b.HasOne("FindTrainer.Domain.Entities.Address", "Address")
                         .WithOne()
-                        .HasForeignKey("FindTrainer.Domain.Entities.Security.ApplicationUser", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FindTrainer.Domain.Entities.Security.ApplicationUser", "AddressId");
 
                     b.HasOne("FindTrainer.Domain.Entities.Photo", "Photo")
                         .WithOne()
-                        .HasForeignKey("FindTrainer.Domain.Entities.Security.ApplicationUser", "PhotoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FindTrainer.Domain.Entities.Security.ApplicationUser", "PhotoId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

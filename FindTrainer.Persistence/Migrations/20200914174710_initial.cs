@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FindTrainer.Persistence.Migrations
 {
-    public partial class initail : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,15 +120,15 @@ namespace FindTrainer.Persistence.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Gender = table.Column<int>(nullable: false),
-                    IsTrainer = table.Column<bool>(nullable: false),
+                    Gender = table.Column<int>(nullable: true),
+                    IsTrainer = table.Column<bool>(nullable: true),
                     KnownAs = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastActive = table.Column<DateTime>(nullable: false),
                     Introduction = table.Column<string>(nullable: true),
-                    AddressId = table.Column<int>(nullable: false),
-                    PhotoId = table.Column<int>(nullable: false),
-                    AdsBidding = table.Column<int>(nullable: false)
+                    AddressId = table.Column<int>(nullable: true),
+                    PhotoId = table.Column<int>(nullable: true),
+                    AdsBidding = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,13 +138,13 @@ namespace FindTrainer.Persistence.Migrations
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Photos_PhotoId",
                         column: x => x.PhotoId,
                         principalTable: "Photos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
