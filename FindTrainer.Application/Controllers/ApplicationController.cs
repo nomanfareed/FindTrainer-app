@@ -8,6 +8,6 @@ namespace FindTrainer.Application.Controllers
     [Authorize()]
     public abstract class ApplicationController : ControllerBase
     {
-        protected int UserId => int.Parse(HttpContext.User.FindFirstValue("Id"));
+        protected int UserId => int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
     }
 }

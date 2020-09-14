@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FindTrainer.Application.Dtos
@@ -13,5 +14,21 @@ namespace FindTrainer.Application.Dtos
         public string Password { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;
+
+        public string Gender { get; set; }
+        public ICollection<string> Focus { get; set; }
+
+        public string KnownAs { get; set; }
+
+        public bool IsTrainer { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        public string Province { get; set; }
+
+        public string Address { get; set; }
+        public string Introduction { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace FindTrainer.Application.Controllers
             ApplicationUser existingUser = await  _userManager.FindByNameAsync(input.Username);
             if(existingUser != null)
             {
-                return BadRequest("Username already exists");
+                return BadRequest(new {Message = "Username already exists"});
             }
 
             var newUser = new ApplicationUser()

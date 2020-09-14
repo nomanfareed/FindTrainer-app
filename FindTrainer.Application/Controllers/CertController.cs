@@ -28,8 +28,8 @@ namespace FindTrainer.Application.Controllers
             _certificationQuery = certificationQuery;
             _mapper = mapper;
         }
-        [HttpPost]
-        public async Task<IActionResult> AddCert(CertificationForCreationDto input)
+        [HttpPost("Add")]
+        public async Task<IActionResult> AddCert([FromBody] CertificationForCreationDto input)
         {
             var certification = _mapper.Map<Certification>(input);
             certification.UserId = UserId;
@@ -53,7 +53,7 @@ namespace FindTrainer.Application.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("list")]
         public async Task<IActionResult> GetCertificationsForUser(int userId, int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
         {
             if(pageSize > Constants.Paging.MaxPageSize)

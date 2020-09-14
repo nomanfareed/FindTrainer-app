@@ -52,7 +52,7 @@ namespace FindTrainer.Application.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> AddPhotoForUser([FromForm] PhotoForCreationDto photoForCreationDto)
         {
             var file = photoForCreationDto.File;

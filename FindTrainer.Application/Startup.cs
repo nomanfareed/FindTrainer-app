@@ -2,6 +2,7 @@ using AutoMapper;
 using FindTrainer.Application.Middleware;
 using FindTrainer.Domain.Entities.Security;
 using FindTrainer.Persistence;
+using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace FindTrainer.Application
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
                 options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
                 options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider;
 
@@ -62,6 +63,10 @@ namespace FindTrainer.Application
                     RequireExpirationTime = true
                 };
             });
+
+
+            services.AddScoped(typeof(ReadOnlyQuery<>));
+            services.AddScoped(typeof(Repository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,12 +74,15 @@ namespace FindTrainer.Application
         {
 
             app.UseMiddleware<AutoSaveMiddleware>();
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseCors(x => x.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseRouting();
 
