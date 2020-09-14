@@ -14,5 +14,8 @@ namespace FindTrainer.Application.Dtos
         [Range(0, 5,
         ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int Stars { get; set; }
+
+        [Required]
+        public int ToId { get; set; }
     }
 }
