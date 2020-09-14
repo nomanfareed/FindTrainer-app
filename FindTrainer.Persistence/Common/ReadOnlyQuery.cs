@@ -1,16 +1,14 @@
 ﻿using FindTrainer.Domain.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace FindTrainer.Persistence.Common
 {
-    public class ReadOnlyQuery<TEntity> where TEntity : Entity
+    public class ReadOnlyQuery<TEntity> where TEntity : class, IEntity
     {
         private readonly DataContext _context;
 
@@ -23,7 +21,7 @@ namespace FindTrainer.Persistence.Common
         }
 
 
-        private IQueryable<TEntity> Query => _query;
+        public IQueryable<TEntity> Query => _query;
 
         public async Task<TEntity> Get(int Id)
         {

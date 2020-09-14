@@ -1,6 +1,7 @@
 ﻿using FindTrainer.Domain.Common;
 using FindTrainer.Domain.Entities;
 using FindTrainer.Domain.Entities.Security;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -50,6 +51,8 @@ namespace FindTrainer.Persistence
             builder.Entity<ApplicationUser>().Property(x => x.LastActive).IsRequired();
             builder.Entity<ApplicationUser>().Property(x => x.Introduction).IsRequired();
             builder.Entity<ApplicationUser>().Property(x => x.AdsBidding).IsRequired();
+            builder.Entity<ApplicationUser>().HasMany(x => x.ReviewsReceived).WithOne(x => x.RecipientUser).HasForeignKey(x => x.RecipientId);
+            builder.Entity<ApplicationUser>().HasMany(x => x.ReviewsSent).WithOne(x => x.Sender).HasForeignKey(x => x.SenderId);
 
             builder.Entity<Focus>().Property(x => x.Name).IsRequired();
 
@@ -74,6 +77,20 @@ namespace FindTrainer.Persistence
 
             builder.Entity<ApplicationUser>().HasOne(x => x.Address).WithOne().HasForeignKey<ApplicationUser>(x => x.AddressId);
 
+            var hasher = new PasswordHasher<ApplicationUser>();
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = 1,
+                
+                UserName = "admin@x.com",
+                NormalizedUserName = "admin@x.com".ToUpper(),
+                Email = "admin@x.com",
+                NormalizedEmail = "admin@x.com".ToUpper(),
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "admin"),
+                SecurityStamp = string.Empty
+            });
+
 
             builder.Entity<Certification>().Property(x => x.Description).IsRequired();
             builder.Entity<Certification>().Property(x => x.Title).IsRequired();
@@ -84,8 +101,8 @@ namespace FindTrainer.Persistence
             builder.Entity<Review>().Property(x => x.Content).IsRequired();
             builder.Entity<Review>().Property(x => x.Stars).IsRequired();
             builder.Entity<Review>().Property(x => x.CreatedDate).IsRequired();
+            builder.Entity<Review>().Property(x => x.RecipientId).IsRequired();
 
-            builder.Entity<ApplicationUser>().HasMany(x => x.Reviews).WithOne(x => x.User).HasForeignKey(x => x.UserId);
 
             builder.Entity<Photo>().Property(x => x.Url).IsRequired();
             builder.Entity<Photo>().Property(x => x.PublicId).IsRequired();

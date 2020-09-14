@@ -1,8 +1,4 @@
 ﻿using FindTrainer.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace FindTrainer.Domain.Entities
 {
     public class Address : Entity

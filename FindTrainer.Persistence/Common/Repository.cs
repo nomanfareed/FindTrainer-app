@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FindTrainer.Persistence.Common
 {
-    public class Repository<TEntity> where TEntity : Entity
+    public class Repository<TEntity> where TEntity : class, IEntity
     {
         private readonly DataContext _context;
 

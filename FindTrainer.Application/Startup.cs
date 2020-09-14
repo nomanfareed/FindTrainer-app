@@ -30,7 +30,7 @@ namespace FindTrainer.Application
             services.AddControllers();
 
             services.AddDbContext<DataContext>(options =>
-                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                     options.UseSqlite("Data Source=FindTrainerData.db"));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
