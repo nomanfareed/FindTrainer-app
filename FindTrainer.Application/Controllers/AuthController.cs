@@ -16,6 +16,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static FindTrainer.Domain.Enums;
 
 namespace FindTrainer.Application.Controllers
 {
@@ -54,9 +55,28 @@ namespace FindTrainer.Application.Controllers
                 Created = DateTime.Now,
                 LastActive = DateTime.Now,
                 UserName = input.Username,
+                Gender = (Gender)input.Gender,
+                KnownAs = input.KnownAs,
+                Introduction = input.Introduction,
+                Address = new Address()
+                {
+                    City = input.City,
+                    Country = input.Country,
+                    FullAddress = input.Address,
+                    Province = input.Province
+                }
             };
 
             IdentityResult userCreationResult = await _userManager.CreateAsync(newUser, input.Password);
+
+            if (input.IsTrainer)
+            {
+                await _userManager.AddToRoleAsync(newUser, Constants.Roles.Trainer);
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(newUser, Constants.Roles.User);
+            }
 
             if (!userCreationResult.Succeeded)
             {

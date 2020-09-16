@@ -15,7 +15,7 @@ namespace FindTrainer.Application.Dtos
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;
 
-        public string Gender { get; set; }
+        public int Gender { get; set; }
         public ICollection<string> Focus { get; set; }
 
         public string KnownAs { get; set; }
