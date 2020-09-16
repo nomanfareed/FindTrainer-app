@@ -59,7 +59,7 @@ namespace FindTrainer.Application.Controllers
 
             return Ok();
         }
-        // [ServiceFilter(typeof(LogUserActivity))]
+
         [HttpDelete]
         public async Task<IActionResult> DeleteUser()
         {

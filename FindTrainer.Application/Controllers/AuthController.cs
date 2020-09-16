@@ -1,8 +1,11 @@
 ﻿using FindTrainer.Application.Dtos;
+using FindTrainer.Domain.Entities;
 using FindTrainer.Domain.Entities.Security;
+using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -23,13 +26,16 @@ namespace FindTrainer.Application.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _config;
+        private readonly Repository<ApplicationUser> _usersRepo;
 
         public AuthController(UserManager<ApplicationUser> userManager,
                               SignInManager<ApplicationUser> signInManager,
+                              Repository<ApplicationUser> usersRepo,
                               IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _usersRepo = usersRepo;
             _config = config;
         }
 
@@ -129,24 +135,50 @@ namespace FindTrainer.Application.Controllers
         public async Task SeedUsers()
         {
             var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
-            var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(userData);
+            var users = JsonConvert.DeserializeObject<List<UserDataModel>>(userData);
             foreach (var user in users)
             {
                 var appUser = new ApplicationUser()
                 {
                     AdsBidding = user.AdsBidding,
                     Created = DateTime.Now,
-                    Email = user.Email,
                     Gender = user.Gender,
                     IsTrainer = user.IsTrainer,
                     Introduction = user.Introduction,
-                    UserName = user.UserName,
+                    UserName = user.Username,
                     KnownAs = user.KnownAs,
-                    PhoneNumber = user.PhoneNumber
                 };
 
 
                 await _userManager.CreateAsync(appUser, "P@ssw0rd");
+                ApplicationUser userToUpdate = await _usersRepo.DataSet.Where(x => x.UserName == user.Username)
+                                                                 .Include(x => x.Address)
+                                                                 .Include(x => x.Photo)
+                                                                 .Include(x => x.Certifications)
+                                                                 .Include(x => x.ApplicationUserFocuses)
+                                                                 .ThenInclude(x => x.Focus)
+                                                                 .SingleAsync();
+
+                userToUpdate.Address = user.Address;
+                userToUpdate.Photo = user.Profile;
+                userToUpdate.Certifications = user.Certifications;
+                
+
+                if(user.Focus != null && user.Focus.Count() > 0)
+                {
+                    foreach (var f in user.Focus)
+                    {
+                        var appFocus = new ApplicationUserFocus()
+                        {
+                            Focus = new Focus()
+                            {
+                                Name = f.Name
+                            }
+                        };
+
+                        userToUpdate.ApplicationUserFocuses.Add(appFocus);
+                    }
+                }
             }
         }
     }
