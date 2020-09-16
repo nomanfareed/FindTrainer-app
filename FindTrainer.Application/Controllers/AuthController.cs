@@ -57,6 +57,9 @@ namespace FindTrainer.Application.Controllers
                 return BadRequest(userCreationError.Description);
             }
 
+            newUser = await _userManager.FindByNameAsync(newUser.UserName);
+            await _userManager.AddToRoleAsync(newUser, Constants.Roles.User);
+
             return Ok();
         }
 
@@ -71,14 +74,7 @@ namespace FindTrainer.Application.Controllers
             {
                 return BadRequest("Wrong username or password");
             }
-
-            ApplicationUser loggedinUser = await _userManager.FindByNameAsync(input.Username);
-
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, loggedinUser.Id.ToString()),
-                new Claim(ClaimTypes.Name, loggedinUser.UserName)
-            };
+            var claims = await GetUserClaims(input.Username);
 
             JwtSecurityToken token = GenerateToken(claims);
 
@@ -90,6 +86,19 @@ namespace FindTrainer.Application.Controllers
 
 
             return Ok(result);
+        }
+
+        private async Task<List<Claim>> GetUserClaims(string userName)
+        {
+            ApplicationUser usr = await _userManager.FindByNameAsync(userName);
+            IList<string> roles = await _userManager.GetRolesAsync(usr);
+
+            List<Claim> claims = roles.Select(r => new Claim("Role", r)).ToList();
+
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, usr.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Name, usr.UserName));
+
+            return claims;
         }
 
         private JwtSecurityToken GenerateToken(IEnumerable<Claim> claims)

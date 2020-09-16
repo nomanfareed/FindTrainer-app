@@ -10,5 +10,16 @@ namespace FindTrainer.Application
 
             public const int MaxPageSize = 100;
         }
+
+
+        public class Roles
+        {
+            public const string Trainer = "TRAINER";
+
+            public const string User = "USER";
+
+            public const string Admin = "ADMIN";
+        }
+
     }
 }
