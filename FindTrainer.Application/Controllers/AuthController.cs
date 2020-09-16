@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -36,10 +37,10 @@ namespace FindTrainer.Application.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto input)
         {
-            ApplicationUser existingUser = await  _userManager.FindByNameAsync(input.Username);
-            if(existingUser != null)
+            ApplicationUser existingUser = await _userManager.FindByNameAsync(input.Username);
+            if (existingUser != null)
             {
-                return BadRequest(new {Message = "Username already exists"});
+                return BadRequest(new { Message = "Username already exists" });
             }
 
             var newUser = new ApplicationUser()
@@ -49,9 +50,9 @@ namespace FindTrainer.Application.Controllers
                 UserName = input.Username,
             };
 
-             IdentityResult userCreationResult = await _userManager.CreateAsync(newUser, input.Password);
+            IdentityResult userCreationResult = await _userManager.CreateAsync(newUser, input.Password);
 
-            if(!userCreationResult.Succeeded)
+            if (!userCreationResult.Succeeded)
             {
                 IdentityError userCreationError = userCreationResult.Errors.First();
                 return BadRequest(userCreationError.Description);
@@ -68,9 +69,10 @@ namespace FindTrainer.Application.Controllers
         [AllowAnonymous()]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto input)
         {
+            await PerpareIfFirstRun();
             var signInResult = await _signInManager.PasswordSignInAsync(input.Username, input.Password, isPersistent: false, lockoutOnFailure: false);
 
-            if(!signInResult.Succeeded)
+            if (!signInResult.Succeeded)
             {
                 return BadRequest("Wrong username or password");
             }
@@ -114,6 +116,38 @@ namespace FindTrainer.Application.Controllers
             );
 
             return token;
+        }
+
+        private async Task PerpareIfFirstRun()
+        {
+            if (_userManager.Users.Count() == 0)
+            {
+                await SeedUsers();
+            }
+        }
+
+        public async Task SeedUsers()
+        {
+            var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+            var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(userData);
+            foreach (var user in users)
+            {
+                var appUser = new ApplicationUser()
+                {
+                    AdsBidding = user.AdsBidding,
+                    Created = DateTime.Now,
+                    Email = user.Email,
+                    Gender = user.Gender,
+                    IsTrainer = user.IsTrainer,
+                    Introduction = user.Introduction,
+                    UserName = user.UserName,
+                    KnownAs = user.KnownAs,
+                    PhoneNumber = user.PhoneNumber
+                };
+
+
+                await _userManager.CreateAsync(appUser, "P@ssw0rd");
+            }
         }
     }
 }

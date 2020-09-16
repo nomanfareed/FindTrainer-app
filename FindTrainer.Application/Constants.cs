@@ -14,11 +14,11 @@ namespace FindTrainer.Application
 
         public class Roles
         {
-            public const string Trainer = "TRAINER";
+            public const string Trainer = "Trainer";
 
-            public const string User = "USER";
+            public const string User = "User";
 
-            public const string Admin = "ADMIN";
+            public const string Admin = "Admin";
         }
 
     }

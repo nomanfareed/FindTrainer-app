@@ -7,6 +7,7 @@ using AutoMapper;
 using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FindTrainer.Application.Controllers
 {
@@ -29,6 +30,7 @@ namespace FindTrainer.Application.Controllers
             _mapper = mapper;
         }
         [HttpPost("Add")]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<IActionResult> AddCert([FromBody] CertificationForCreationDto input)
         {
             var certification = _mapper.Map<Certification>(input);
@@ -40,6 +42,7 @@ namespace FindTrainer.Application.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<IActionResult> DeleteCert(int id)
         {
             bool success = await _certificationRepo.Delete(cert => cert.UserId == UserId && cert.Id == id);

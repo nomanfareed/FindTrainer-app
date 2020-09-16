@@ -8,6 +8,7 @@ using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FindTrainer.Application.Controllers
 {
@@ -28,6 +29,7 @@ namespace FindTrainer.Application.Controllers
         }
 
         [HttpPost("{recipientId}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> AddReview(ReviewForCreationDto reviewIntake)
         {
 
@@ -59,6 +61,7 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpDelete("{reviewId}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
             bool success = await _reviewsRepo.Delete(reviewId);
