@@ -20,7 +20,7 @@ namespace FindTrainer.Persistence.Common
             _dbSet = _context.Set<TEntity>();
         }
 
-        private DbSet<TEntity> DataSet => _dbSet;
+        public DbSet<TEntity> DataSet => _dbSet;
 
         public async Task<TEntity> Get(int Id)
         {

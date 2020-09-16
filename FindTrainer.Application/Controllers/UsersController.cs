@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FindTrainer.Application.Dtos;
 using FindTrainer.Domain.Entities.Security;
 using FindTrainer.Persistence.Common;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,12 +16,18 @@ namespace FindTrainer.Application.Controllers
     public class UsersController : ApplicationController
     {
         private readonly ReadOnlyQuery<ApplicationUser> _usersQuery;
+        private readonly Repository<ApplicationUser> _usersReop;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
         public UsersController(ReadOnlyQuery<ApplicationUser> usersQuery,
+                               Repository<ApplicationUser> usersRepo,
+                               UserManager<ApplicationUser> userManager,
                                IMapper mapper)
         {
             _usersQuery = usersQuery;
+            _usersReop = usersRepo;
+            _userManager = userManager;
             _mapper = mapper;
         }
 
@@ -37,6 +43,37 @@ namespace FindTrainer.Application.Controllers
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
 
             return Ok(userToReturn);
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UserDefaultIntakeDto userForUpdateDto)
+        {
+            ApplicationUser currentUser = await _usersReop.DataSet.Where(usr => usr.Id == UserId)
+                                                            .Include(x => x.Address)
+                                                            .Include(x => x.ApplicationUserFocuses)
+                                                            .ThenInclude(x => x.Focus)
+                                                            .SingleAsync();
+
+            _mapper.Map(userForUpdateDto, currentUser);
+
+            return Ok();
+        }
+        // [ServiceFilter(typeof(LogUserActivity))]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser()
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(UserId.ToString());
+            IdentityResult result = await _userManager.DeleteAsync(user);
+
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.Select(e => e.Description).ToList());
+            }
+
+
+            return Ok();
         }
 
         [HttpGet]
