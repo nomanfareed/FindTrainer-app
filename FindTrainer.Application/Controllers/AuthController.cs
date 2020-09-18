@@ -29,17 +29,20 @@ namespace FindTrainer.Application.Controllers
         private readonly IConfiguration _config;
         private readonly Repository<ApplicationUser> _usersRepo;
         private readonly Repository<NewSignup> _newSignupRepo;
+        private readonly Repository<UniqueSignin> _signinRepo;
 
         public AuthController(UserManager<ApplicationUser> userManager,
                               SignInManager<ApplicationUser> signInManager,
                               Repository<ApplicationUser> usersRepo,
                               Repository<NewSignup> newSignupRepo,
+                              Repository<UniqueSignin> signinRepo,
                               IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _usersRepo = usersRepo;
             _newSignupRepo = newSignupRepo;
+            _signinRepo = signinRepo;
             _config = config;
         }
 
@@ -115,6 +118,27 @@ namespace FindTrainer.Application.Controllers
         }
 
 
+        private async Task IncreaseSigninCounter()
+        {
+            DateTime today = DateTime.Now.Date;
+            UniqueSignin record = (await _signinRepo.Get(x => x.SigninDate == today)).SingleOrDefault();
+
+            if (record == null)
+            {
+                record = new UniqueSignin()
+                {
+                    SigninDate = today,
+                    UserNumber = 1
+                };
+
+                await _signinRepo.Add(record);
+                return;
+            }
+
+            record.UserNumber++;
+        }
+
+
         [HttpPost("login")]
         [AllowAnonymous()]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto input)
@@ -136,7 +160,7 @@ namespace FindTrainer.Application.Controllers
                 expiration = token.ValidTo
             };
 
-
+            await IncreaseSigninCounter();
             return Ok(result);
         }
 
