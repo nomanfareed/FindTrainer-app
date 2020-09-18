@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FindTrainer.Domain.Entities;
 using FindTrainer.Persistence.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace FindTrainer.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class StatisticsController : ApplicationController
     {
         private readonly ReadOnlyQuery<NewSignup> _newSignupsQuery;
