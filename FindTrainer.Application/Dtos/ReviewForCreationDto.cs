@@ -16,6 +16,6 @@ namespace FindTrainer.Application.Dtos
         public int Stars { get; set; }
 
         [Required]
-        public int ToId { get; set; }
+        public int RecieverId { get; set; }
     }
 }

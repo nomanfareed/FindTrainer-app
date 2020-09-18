@@ -33,7 +33,7 @@ namespace FindTrainer.Application.Controllers
         public async Task<IActionResult> AddReview(ReviewForCreationDto reviewIntake)
         {
 
-            if(await UserAlreadyReviewed(reviewIntake.ToId))
+            if(await UserAlreadyReviewed(reviewIntake.RecieverId))
             {
                 return Unauthorized("You already gave a review to this person");
             }
@@ -41,7 +41,7 @@ namespace FindTrainer.Application.Controllers
             var newReview = new Review
             {
                 SenderId = UserId,
-                RecipientId = reviewIntake.ToId,
+                RecipientId = reviewIntake.RecieverId,
                 Stars = reviewIntake.Stars,
                 CreatedDate = DateTime.Now,
                 Content = reviewIntake.Content,

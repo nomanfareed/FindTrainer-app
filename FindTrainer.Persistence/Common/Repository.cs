@@ -72,7 +72,6 @@ namespace FindTrainer.Persistence.Common
 
             return false;
         }
-
         public async Task<bool> Delete(Expression<Func<TEntity, bool>> where)
         {
             List<TEntity> records = await Get(where);

@@ -25,6 +25,8 @@ namespace FindTrainer.Persistence
         public DbSet<Certification> Certifications { get; set; }
         public DbSet<Focus> Focuses { get; set; }
 
+        public DbSet<NewSignup> NewSignups { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -96,6 +98,9 @@ namespace FindTrainer.Persistence
             builder.Entity<Photo>().Property(x => x.PublicId).IsRequired();
 
             builder.Entity<ApplicationUser>().HasOne(x => x.Photo).WithOne().HasForeignKey<ApplicationUser>(x => x.PhotoId);
+
+            builder.Entity<NewSignup>().Property(x => x.SignupDate).IsRequired();
+            builder.Entity<NewSignup>().Property(x => x.UserNumber).IsRequired();
         }
 
     }

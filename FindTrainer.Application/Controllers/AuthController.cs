@@ -28,15 +28,18 @@ namespace FindTrainer.Application.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _config;
         private readonly Repository<ApplicationUser> _usersRepo;
+        private readonly Repository<NewSignup> _newSignupRepo;
 
         public AuthController(UserManager<ApplicationUser> userManager,
                               SignInManager<ApplicationUser> signInManager,
                               Repository<ApplicationUser> usersRepo,
+                              Repository<NewSignup> newSignupRepo,
                               IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _usersRepo = usersRepo;
+            _newSignupRepo = newSignupRepo;
             _config = config;
         }
 
@@ -86,8 +89,29 @@ namespace FindTrainer.Application.Controllers
 
             newUser = await _userManager.FindByNameAsync(newUser.UserName);
             await _userManager.AddToRoleAsync(newUser, Constants.Roles.User);
+            await IncreaseSignupCounter();
 
             return Ok();
+        }
+
+        private async Task IncreaseSignupCounter()
+        {
+            DateTime today = DateTime.Now.Date;
+            NewSignup record = (await _newSignupRepo.Get(x => x.SignupDate == today)).SingleOrDefault();
+
+            if(record == null)
+            {
+                record = new NewSignup()
+                {
+                    SignupDate = today,
+                    UserNumber = 1
+                };
+
+                await _newSignupRepo.Add(record);
+                return;
+            }
+
+            record.UserNumber++;
         }
 
 
