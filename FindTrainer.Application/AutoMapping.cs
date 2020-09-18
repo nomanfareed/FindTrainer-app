@@ -52,7 +52,7 @@ namespace FindTrainer.Application
              })
            .ForMember(dest => dest.Gender, opt =>
            {
-               opt.MapFrom(s => s.Gender.ToLower() == "male" ? 2 : s.Gender.ToLower() == "female" ? 1 : 3);
+               opt.MapFrom(s => s.Gender.ToString().ToLower() == "male" ? 2 : s.Gender.ToString().ToLower() == "female" ? 1 : 3);
            });
             CreateMap<ApplicationUser, UserForDetailedDto>()
                   .ForMember(dest => dest.AvgStar, opt =>

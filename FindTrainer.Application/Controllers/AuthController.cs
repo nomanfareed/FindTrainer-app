@@ -152,7 +152,7 @@ namespace FindTrainer.Application.Controllers
             }
         }
 
-        public async Task SeedUsers()
+        private async Task SeedUsers()
         {
             var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
             var users = JsonConvert.DeserializeObject<List<UserDataModel>>(userData);

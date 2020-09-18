@@ -67,6 +67,8 @@ namespace FindTrainer.Application
 
             services.AddScoped(typeof(ReadOnlyQuery<>));
             services.AddScoped(typeof(Repository<>));
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +85,13 @@ namespace FindTrainer.Application
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Find Trainer API V1");
+            });
 
             app.UseRouting();
 
