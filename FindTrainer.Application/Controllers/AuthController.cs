@@ -30,12 +30,14 @@ namespace FindTrainer.Application.Controllers
         private readonly Repository<ApplicationUser> _usersRepo;
         private readonly Repository<NewSignup> _newSignupRepo;
         private readonly Repository<UniqueSignin> _signinRepo;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         public AuthController(UserManager<ApplicationUser> userManager,
                               SignInManager<ApplicationUser> signInManager,
                               Repository<ApplicationUser> usersRepo,
                               Repository<NewSignup> newSignupRepo,
                               Repository<UniqueSignin> signinRepo,
+                              RoleManager<ApplicationRole> roleManager,
                               IConfiguration config)
         {
             _userManager = userManager;
@@ -43,6 +45,7 @@ namespace FindTrainer.Application.Controllers
             _usersRepo = usersRepo;
             _newSignupRepo = newSignupRepo;
             _signinRepo = signinRepo;
+            _roleManager = roleManager;
             _config = config;
         }
 
@@ -196,6 +199,7 @@ namespace FindTrainer.Application.Controllers
         {
             if (_userManager.Users.Count() == 0)
             {
+                await SeedRoles();
                 await SeedUsers();
             }
         }
@@ -248,6 +252,20 @@ namespace FindTrainer.Application.Controllers
                     }
                 }
             }
+
+            await _userManager.CreateAsync(new ApplicationUser()
+            {
+                UserName = "Admin"
+            }, "P@ssw0rd");
+        }
+
+        private async Task SeedRoles()
+        {
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Admin, NormalizedName = Constants.Roles.Admin });
+
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
+
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
         }
     }
 }
