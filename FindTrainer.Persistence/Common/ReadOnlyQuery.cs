@@ -43,6 +43,11 @@ namespace FindTrainer.Persistence.Common
             return await queryPart.SingleAsync();
         }
 
+        public async Task<int> Count(Expression<Func<TEntity, bool>> where)
+        {
+            return await _query.Where(where).CountAsync();
+        }
+
         public async Task<List<TEntity>> Get(Expression<Func<TEntity, bool>> where,Expression<Func<TEntity, object>>[] includeProperties = null,
                                              Expression<Func<TEntity, object>> ordering = null, bool asyn = true, int? skip = null, int? take = null)
         {
