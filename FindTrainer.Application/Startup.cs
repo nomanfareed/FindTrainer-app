@@ -6,7 +6,9 @@ using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -63,11 +65,11 @@ namespace FindTrainer.Application
                     IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecurityKey"])),
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    RequireExpirationTime = true
-                };
+                    RequireExpirationTime = true,
+                    NameClaimType = "Roles"
+            };
             });
 
-            services.AddAuthorization();
 
 
             services.AddScoped(typeof(ReadOnlyQuery<>));

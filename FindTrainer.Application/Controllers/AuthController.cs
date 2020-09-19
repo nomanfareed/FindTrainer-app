@@ -172,7 +172,7 @@ namespace FindTrainer.Application.Controllers
             ApplicationUser usr = await _userManager.FindByNameAsync(userName);
             IList<string> roles = await _userManager.GetRolesAsync(usr);
 
-            List<Claim> claims = roles.Select(r => new Claim("Roles", r)).ToList();
+            List<Claim> claims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
 
             claims.Add(new Claim(ClaimTypes.NameIdentifier, usr.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Name, usr.UserName));

@@ -4,7 +4,7 @@ namespace FindTrainer.Application.Dtos
 {
     public class UserForListDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Gender { get; set; }
         public string KnownAs { get; set; }

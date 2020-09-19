@@ -30,7 +30,8 @@ namespace FindTrainer.Application.Controllers
             _mapper = mapper;
         }
         [HttpPost("Add")]
-        [Authorize(Roles = "Admin,Trainer")]
+
+        [Authorize(Roles = "Trainer")]
         public async Task<IActionResult> AddCert([FromBody] CertificationForCreationDto input)
         {
             var certification = _mapper.Map<Certification>(input);

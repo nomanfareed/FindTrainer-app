@@ -109,11 +109,13 @@ namespace FindTrainer.Application.Controllers
                 query = query.Where(u => u.KnownAs == userParams.KnownAs);
             }
             //Order By
-            userParams.OrderBy = userParams.OrderBy.ToLower();
+            
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
+                userParams.OrderBy = userParams.OrderBy.ToLower();
                 switch (userParams.OrderBy)
                 {
+                    
                     case "popular":
                         query = query.OrderByDescending(u => u.ReviewsReceived.Count());
                         break;
