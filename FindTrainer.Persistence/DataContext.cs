@@ -108,5 +108,8 @@ namespace FindTrainer.Persistence
             builder.Entity<UniqueSignin>().Property(x => x.UserNumber).IsRequired();
         }
 
+
+
+
     }
 }

@@ -5,6 +5,7 @@ using AutoMapper;
 using FindTrainer.Application.Dtos;
 using FindTrainer.Domain.Entities.Security;
 using FindTrainer.Persistence.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,10 +32,11 @@ namespace FindTrainer.Application.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        [HttpGet("{userId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUser(int userId)
         {
-            var user = await _usersQuery.Get(id);
+            var user = await _usersQuery.Get(userId);
             if (user == null)
             {
                 return NotFound();
@@ -77,6 +79,7 @@ namespace FindTrainer.Application.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
             IQueryable<ApplicationUser> usersQuery = BuildUsersQuery(userParams);

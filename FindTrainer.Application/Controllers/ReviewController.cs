@@ -74,6 +74,7 @@ namespace FindTrainer.Application.Controllers
             return Ok();
         }
         [HttpGet("{userId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetReviewsForUser(int userid, int page, int pageSize = Constants.Paging.DefaultPageSize)
         {
 

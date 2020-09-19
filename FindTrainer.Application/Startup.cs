@@ -1,5 +1,7 @@
 using AutoMapper;
+using FindTrainer.Application.Dtos;
 using FindTrainer.Application.Middleware;
+using FindTrainer.Domain.Entities;
 using FindTrainer.Domain.Entities.Security;
 using FindTrainer.Persistence;
 using FindTrainer.Persistence.Common;
@@ -14,14 +16,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FindTrainer.Application
 {
     public class Startup
     {
+        private UserManager<ApplicationUser> _userManager;
+        private RoleManager<ApplicationRole> _roleManager;
+        private IServiceProvider _serviceProvider;
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -98,9 +108,9 @@ namespace FindTrainer.Application
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
-
+            _serviceProvider = serviceProvider;
             app.UseMiddleware<AutoSaveMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
@@ -129,6 +139,97 @@ namespace FindTrainer.Application
             {
                 endpoints.MapControllers();
             });
+
+            PerpareIfFirstRun().Wait();
+        }
+
+
+        private async Task PerpareIfFirstRun()
+        {
+            _userManager = (UserManager<ApplicationUser>)_serviceProvider.GetService(typeof(UserManager<ApplicationUser>));
+            _roleManager = (RoleManager<ApplicationRole>)_serviceProvider.GetService(typeof(RoleManager<ApplicationRole>));
+            if (_userManager.Users.Count() == 0)
+            {
+
+                await SeedRoles();
+                await SeedUsers();
+            }
+        }
+
+        private async Task SeedUsers()
+        {
+            var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+            var users = JsonConvert.DeserializeObject<List<UserDataModel>>(userData);
+            foreach (var user in users)
+            {
+                var appUser = new ApplicationUser()
+                {
+                    AdsBidding = user.AdsBidding,
+                    Created = DateTime.Now,
+                    Gender = user.Gender,
+                    IsTrainer = user.IsTrainer,
+                    Introduction = user.Introduction,
+                    UserName = user.Username,
+                    KnownAs = user.KnownAs,
+                };
+
+
+                await _userManager.CreateAsync(appUser, "P@ssw0rd");
+                if (appUser.IsTrainer.HasValue && appUser.IsTrainer.Value)
+                {
+                    await _userManager.AddToRoleAsync(appUser, Constants.Roles.Trainer);
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(appUser, Constants.Roles.User);
+                }
+
+                var usersRepo = (Repository<ApplicationUser>)_serviceProvider.GetService(typeof(Repository<ApplicationUser>));
+
+                ApplicationUser userToUpdate = await usersRepo.DataSet.Where(x => x.UserName == user.Username)
+                                                                 .Include(x => x.Address)
+                                                                 .Include(x => x.Photo)
+                                                                 .Include(x => x.Certifications)
+                                                                 .Include(x => x.ApplicationUserFocuses)
+                                                                 .ThenInclude(x => x.Focus)
+                                                                 .SingleAsync();
+
+                userToUpdate.Address = user.Address;
+                userToUpdate.Photo = user.Profile;
+                userToUpdate.Certifications = user.Certifications;
+
+
+                if (user.Focus != null && user.Focus.Count() > 0)
+                {
+                    foreach (var f in user.Focus)
+                    {
+                        var appFocus = new ApplicationUserFocus()
+                        {
+                            Focus = new Focus()
+                            {
+                                Name = f.Name
+                            }
+                        };
+
+                        userToUpdate.ApplicationUserFocuses.Add(appFocus);
+                    }
+                }
+            }
+
+            await _userManager.CreateAsync(new ApplicationUser()
+            {
+                UserName = "Admin"
+            }, "P@ssw0rd");
+
+        }
+
+        private async Task SeedRoles()
+        {
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Admin, NormalizedName = Constants.Roles.Admin });
+
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
+
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Trainer, NormalizedName = Constants.Roles.Trainer });
         }
     }
 }

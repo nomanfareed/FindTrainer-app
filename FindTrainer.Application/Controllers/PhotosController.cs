@@ -38,10 +38,10 @@ namespace FindTrainer.Application.Controllers
             _photoRepo = photoRepo;
         }
 
-        [HttpGet("{id}", Name = "GetPhoto")]
-        public async Task<IActionResult> GetPhoto(int id)
+        [HttpGet("{photoId}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int photoId)
         {
-            var photo = await _photoQuery.Get(id);
+            var photo = await _photoQuery.Get(photoId);
             if (photo == null)
             {
                 return NotFound();

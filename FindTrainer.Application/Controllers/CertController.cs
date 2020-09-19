@@ -42,11 +42,11 @@ namespace FindTrainer.Application.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{certId}")]
         [Authorize(Roles = "Admin,Trainer")]
-        public async Task<IActionResult> DeleteCert(int id)
+        public async Task<IActionResult> DeleteCert(int certId)
         {
-            bool success = await _certificationRepo.Delete(cert => cert.UserId == UserId && cert.Id == id);
+            bool success = await _certificationRepo.Delete(cert => cert.UserId == UserId && cert.Id == certId);
 
             if(success)
             {
@@ -58,8 +58,8 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpGet("list")]
-
-        public async Task<IActionResult> GetCertificationsForUser(int userId, int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
+        [AllowAnonymous]
+        public async Task<IActionResult> GetCertificationsForUser(int trainerId, int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
         {
             if(pageSize > Constants.Paging.MaxPageSize)
             {
@@ -67,7 +67,7 @@ namespace FindTrainer.Application.Controllers
             }
 
 
-            ApplicationUser user = await _userManager.FindByIdAsync(userId.ToString());
+            ApplicationUser user = await _userManager.FindByIdAsync(trainerId.ToString());
             if(user == null)
             {
                 return BadRequest("User does not exist");
@@ -79,7 +79,7 @@ namespace FindTrainer.Application.Controllers
             }
 
             int skip = (pageNumber - 1) * pageSize;
-            List<Certification> userCertifications = await _certificationQuery.Get(cert => cert.UserId == userId, null, ord => ord.Id, true, skip, pageSize);
+            List<Certification> userCertifications = await _certificationQuery.Get(cert => cert.UserId == trainerId, null, ord => ord.Id, true, skip, pageSize);
 
             var certsToReturn = _mapper.Map<IEnumerable<CertificationForReturnDto>>(userCertifications);
 
