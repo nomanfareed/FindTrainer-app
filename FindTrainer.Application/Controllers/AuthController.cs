@@ -172,7 +172,7 @@ namespace FindTrainer.Application.Controllers
             ApplicationUser usr = await _userManager.FindByNameAsync(userName);
             IList<string> roles = await _userManager.GetRolesAsync(usr);
 
-            List<Claim> claims = roles.Select(r => new Claim("Role", r)).ToList();
+            List<Claim> claims = roles.Select(r => new Claim("Roles", r)).ToList();
 
             claims.Add(new Claim(ClaimTypes.NameIdentifier, usr.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Name, usr.UserName));
@@ -223,6 +223,15 @@ namespace FindTrainer.Application.Controllers
 
 
                 await _userManager.CreateAsync(appUser, "P@ssw0rd");
+                if(appUser.IsTrainer.HasValue && appUser.IsTrainer.Value)
+                {
+                    await _userManager.AddToRoleAsync(appUser, Constants.Roles.Trainer);
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(appUser, Constants.Roles.User);
+                }
+
                 ApplicationUser userToUpdate = await _usersRepo.DataSet.Where(x => x.UserName == user.Username)
                                                                  .Include(x => x.Address)
                                                                  .Include(x => x.Photo)
@@ -257,6 +266,7 @@ namespace FindTrainer.Application.Controllers
             {
                 UserName = "Admin"
             }, "P@ssw0rd");
+
         }
 
         private async Task SeedRoles()
@@ -265,7 +275,7 @@ namespace FindTrainer.Application.Controllers
 
             await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
 
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
+            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Trainer, NormalizedName = Constants.Roles.Trainer });
         }
     }
 }

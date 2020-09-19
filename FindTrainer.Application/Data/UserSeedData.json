@@ -2,7 +2,7 @@
   {
     "Username": "Lola",
     "Gender": 1,
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Lola",
     "Created": "2017-08-02",
     "LastActive": "2017-08-02",
@@ -34,7 +34,7 @@
   {
     "Username": "Dorothy",
     "Gender": 1,
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Dorothy",
     "Created": "2017-01-21",
     "LastActive": "2017-01-21",
@@ -66,7 +66,7 @@
   {
     "Username": "Reba",
     "Gender": 1,
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Reba",
     "Created": "2017-06-24",
     "LastActive": "2017-06-24",
@@ -98,7 +98,7 @@
   {
     "Username": "Annmarie",
     "Gender": 1,
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Annmarie",
     "Created": "2017-07-17",
     "LastActive": "2017-07-17",
@@ -130,7 +130,7 @@
   {
     "Username": "Ashley",
     "Gender": 1,
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Ashley",
     "Created": "2017-03-25",
     "LastActive": "2017-03-25",
@@ -162,7 +162,7 @@
   {
     "Username": "Roy",
     "Gender": "male",
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Roy",
     "Created": "2017-08-03",
     "LastActive": "2017-08-03",
@@ -194,7 +194,7 @@
   {
     "Username": "Duke",
     "Gender": "male",
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Duke",
     "Created": "2017-07-07",
     "LastActive": "2017-07-07",
@@ -226,7 +226,7 @@
   {
     "Username": "Lloyd",
     "Gender": "male",
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Lloyd",
     "Created": "2017-08-22",
     "LastActive": "2017-08-22",
@@ -258,7 +258,7 @@
   {
     "Username": "Larsen",
     "Gender": "male",
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Larsen",
     "Created": "2017-02-17",
     "LastActive": "2017-02-17",
@@ -290,7 +290,7 @@
   {
     "Username": "Simon",
     "Gender": "male",
-    "Password": "password",
+    "P@ssw0rd": "P@ssw0rd",
     "KnownAs": "Simon",
     "Created": "2017-06-27",
     "LastActive": "2017-06-27",

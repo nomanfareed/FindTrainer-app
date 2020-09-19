@@ -67,9 +67,16 @@ namespace FindTrainer.Application
                 };
             });
 
+            services.AddAuthorization();
+
 
             services.AddScoped(typeof(ReadOnlyQuery<>));
             services.AddScoped(typeof(Repository<>));
+
+            var key = new OpenApiSecurityScheme() { Name = "api key" };
+            var requirement = new OpenApiSecurityRequirement {
+    { key, new List<string>() }
+};
 
             services.AddSwaggerGen(c =>
             {
@@ -82,7 +89,10 @@ namespace FindTrainer.Application
                         Name = "Authorization",
                         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
                     });
+                c.AddSecurityRequirement(requirement);
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

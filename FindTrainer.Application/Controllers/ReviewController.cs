@@ -29,7 +29,7 @@ namespace FindTrainer.Application.Controllers
         }
 
         [HttpPost("{recipientId}")]
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> AddReview(ReviewForCreationDto reviewIntake)
         {
 
@@ -61,7 +61,7 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpDelete("{reviewId}")]
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
             bool success = await _reviewsRepo.Delete(reviewId);

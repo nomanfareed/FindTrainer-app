@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FindTrainer.Application.Controllers
 {
-    [Authorize()]
+    [Authorize]
     public abstract class ApplicationController : ControllerBase
     {
         protected int UserId => int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));

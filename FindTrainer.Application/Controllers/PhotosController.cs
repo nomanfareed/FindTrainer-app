@@ -6,6 +6,7 @@ using FindTrainer.Application.Dtos;
 using FindTrainer.Domain.Entities;
 using FindTrainer.Domain.Entities.Security;
 using FindTrainer.Persistence.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,6 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpPost("Add")]
-
         public async Task<IActionResult> AddPhotoForUser([FromForm] PhotoForCreationDto photoForCreationDto)
         {
             var file = photoForCreationDto.File;
