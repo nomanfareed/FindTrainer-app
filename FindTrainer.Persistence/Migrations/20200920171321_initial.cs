@@ -293,14 +293,14 @@ namespace FindTrainer.Persistence.Migrations
                     Description = table.Column<string>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    trainerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Certifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Certifications_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Certifications_AspNetUsers_trainerId",
+                        column: x => x.trainerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -390,9 +390,9 @@ namespace FindTrainer.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Certifications_UserId",
+                name: "IX_Certifications_trainerId",
                 table: "Certifications",
-                column: "UserId");
+                column: "trainerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_RecipientId",

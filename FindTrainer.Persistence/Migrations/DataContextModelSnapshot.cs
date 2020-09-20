@@ -92,12 +92,12 @@ namespace FindTrainer.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("trainerId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("trainerId");
 
                     b.ToTable("Certifications");
                 });
@@ -444,7 +444,7 @@ namespace FindTrainer.Persistence.Migrations
                 {
                     b.HasOne("FindTrainer.Domain.Entities.Security.ApplicationUser", null)
                         .WithMany("Certifications")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("trainerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

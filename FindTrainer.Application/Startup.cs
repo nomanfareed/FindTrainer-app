@@ -174,7 +174,7 @@ namespace FindTrainer.Application
                 };
 
 
-                await _userManager.CreateAsync(appUser, "P@ssw0rd");
+                await _userManager.CreateAsync(appUser, user.Password);
                 if (appUser.IsTrainer.HasValue && appUser.IsTrainer.Value)
                 {
                     await _userManager.AddToRoleAsync(appUser, Constants.Roles.Trainer);
