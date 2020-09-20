@@ -1,8 +1,6 @@
 ﻿using FindTrainer.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using static FindTrainer.Domain.Enums;
 
 namespace FindTrainer.Application.Dtos
@@ -10,8 +8,7 @@ namespace FindTrainer.Application.Dtos
     public class UserDataModel
     {
         public string Username { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public string Password { get; set; }
         public virtual IEnumerable<Focus> Focus { get; set; }
         public Gender Gender { get; set; }
         public bool IsTrainer { get; set; }

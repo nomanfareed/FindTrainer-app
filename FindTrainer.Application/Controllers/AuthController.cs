@@ -146,7 +146,7 @@ namespace FindTrainer.Application.Controllers
         [AllowAnonymous()]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto input)
         {
-            await PerpareIfFirstRun();
+            
             var signInResult = await _signInManager.PasswordSignInAsync(input.Username, input.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (!signInResult.Succeeded)
@@ -195,87 +195,6 @@ namespace FindTrainer.Application.Controllers
             return token;
         }
 
-        private async Task PerpareIfFirstRun()
-        {
-            if (_userManager.Users.Count() == 0)
-            {
-                await SeedRoles();
-                await SeedUsers();
-            }
-        }
 
-        private async Task SeedUsers()
-        {
-            var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
-            var users = JsonConvert.DeserializeObject<List<UserDataModel>>(userData);
-            foreach (var user in users)
-            {
-                var appUser = new ApplicationUser()
-                {
-                    AdsBidding = user.AdsBidding,
-                    Created = DateTime.Now,
-                    Gender = user.Gender,
-                    IsTrainer = user.IsTrainer,
-                    Introduction = user.Introduction,
-                    UserName = user.Username,
-                    KnownAs = user.KnownAs,
-                };
-
-
-                await _userManager.CreateAsync(appUser, "P@ssw0rd");
-                if(appUser.IsTrainer.HasValue && appUser.IsTrainer.Value)
-                {
-                    await _userManager.AddToRoleAsync(appUser, Constants.Roles.Trainer);
-                }
-                else
-                {
-                    await _userManager.AddToRoleAsync(appUser, Constants.Roles.User);
-                }
-
-                ApplicationUser userToUpdate = await _usersRepo.DataSet.Where(x => x.UserName == user.Username)
-                                                                 .Include(x => x.Address)
-                                                                 .Include(x => x.Photo)
-                                                                 .Include(x => x.Certifications)
-                                                                 .Include(x => x.ApplicationUserFocuses)
-                                                                 .ThenInclude(x => x.Focus)
-                                                                 .SingleAsync();
-
-                userToUpdate.Address = user.Address;
-                userToUpdate.Photo = user.Profile;
-                userToUpdate.Certifications = user.Certifications;
-                
-
-                if(user.Focus != null && user.Focus.Count() > 0)
-                {
-                    foreach (var f in user.Focus)
-                    {
-                        var appFocus = new ApplicationUserFocus()
-                        {
-                            Focus = new Focus()
-                            {
-                                Name = f.Name
-                            }
-                        };
-
-                        userToUpdate.ApplicationUserFocuses.Add(appFocus);
-                    }
-                }
-            }
-
-            await _userManager.CreateAsync(new ApplicationUser()
-            {
-                UserName = "Admin"
-            }, "P@ssw0rd");
-
-        }
-
-        private async Task SeedRoles()
-        {
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Admin, NormalizedName = Constants.Roles.Admin });
-
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
-
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Trainer, NormalizedName = Constants.Roles.Trainer });
-        }
     }
 }

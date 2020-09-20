@@ -40,7 +40,7 @@ namespace FindTrainer.Application.Controllers
 
             var newReview = new Review
             {
-                SenderId = UserId,
+                SenderId = CurrentUserId,
                 RecipientId = reviewIntake.RecieverId,
                 Stars = reviewIntake.Stars,
                 CreatedDate = DateTime.Now,
@@ -56,7 +56,7 @@ namespace FindTrainer.Application.Controllers
 
         private async Task<bool> UserAlreadyReviewed(int recipientId)
         {
-            return (await _reviewsQuery.Query.Where(x => x.SenderId == UserId && x.RecipientId == recipientId).CountAsync()) > 0;
+            return (await _reviewsQuery.Query.Where(x => x.SenderId == CurrentUserId && x.RecipientId == recipientId).CountAsync()) > 0;
         }
 
 
@@ -74,10 +74,11 @@ namespace FindTrainer.Application.Controllers
             return Ok();
         }
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetReviewsForUser(int userid, int page, int pageSize = Constants.Paging.DefaultPageSize)
+        [AllowAnonymous]
+        public async Task<IActionResult> GetReviewsForTrainer(int trainerId, int page, int pageSize = Constants.Paging.DefaultPageSize)
         {
 
-            var reviews = await _reviewsQuery.Get(rev => rev.RecipientId == userid, null, o => o.CreatedDate, true, (page - 1) * pageSize, pageSize);
+            var reviews = await _reviewsQuery.Get(rev => rev.RecipientId == trainerId, null, o => o.CreatedDate, true, (page - 1) * pageSize, pageSize);
 
             var reviewToReturn = _mapper.Map<IEnumerable<ReviewForListDto>>(reviews);
 

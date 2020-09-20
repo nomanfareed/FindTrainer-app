@@ -2,12 +2,15 @@
   {
     "Username": "Lola",
     "Gender": 1,
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Lola",
     "Created": "2017-08-02",
     "LastActive": "2017-08-02",
     "Introduction": "Nulla excepteur sit anim ex do qui laboris officia eiusmod ut incididunt. Enim occaecat sint dolor esse et enim. Ad cupidatat exercitation ea id eiusmod nostrud amet Lorem sint. Laboris cupidatat aute dolor ad eu tempor elit ea tempor quis et. Lorem eiusmod commodo cillum id aute nisi fugiat. Aute laborum tempor ullamco elit exercitation veniam commodo elit dolor.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -34,12 +37,15 @@
   {
     "Username": "Dorothy",
     "Gender": 1,
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Dorothy",
     "Created": "2017-01-21",
     "LastActive": "2017-01-21",
     "Introduction": "Consequat mollit velit aliquip in nostrud ad esse Lorem ea qui do et. Reprehenderit occaecat consectetur ad in laborum labore id. Esse ea duis eu non duis cillum magna reprehenderit deserunt. Tempor aute qui veniam non consequat do ea ipsum tempor ea deserunt consectetur. Laboris ipsum laboris ipsum sit Lorem magna nulla et. Nulla minim nisi minim fugiat. Exercitation veniam nostrud id exercitation adipisicing commodo.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -66,12 +72,15 @@
   {
     "Username": "Reba",
     "Gender": 1,
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Reba",
     "Created": "2017-06-24",
     "LastActive": "2017-06-24",
     "Introduction": "Ea tempor reprehenderit officia commodo aliqua dolor. Ex culpa eiusmod quis Lorem fugiat. Incididunt duis ad enim sunt qui. Ullamco magna dolor in eiusmod sit. Ut ea ut commodo ipsum eu non sit eiusmod voluptate consequat aute eu. Nisi velit in sunt labore nulla sunt quis amet enim. Nulla sint mollit cupidatat aliqua ex adipisicing sint id tempor officia incididunt irure enim.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -98,12 +107,15 @@
   {
     "Username": "Annmarie",
     "Gender": 1,
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Annmarie",
     "Created": "2017-07-17",
     "LastActive": "2017-07-17",
     "Introduction": "Enim eiusmod esse magna aliquip occaecat. Non ea quis cillum aliquip reprehenderit aute proident officia do nulla voluptate duis. Deserunt ullamco quis qui cillum consequat esse sunt in dolore nulla sit officia voluptate. Tempor pariatur exercitation pariatur reprehenderit. Incididunt nulla magna exercitation officia enim veniam adipisicing laboris proident nisi id Lorem.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -130,12 +142,15 @@
   {
     "Username": "Ashley",
     "Gender": 1,
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Ashley",
     "Created": "2017-03-25",
     "LastActive": "2017-03-25",
     "Introduction": "Eiusmod dolore consectetur nisi laborum id duis occaecat dolor cupidatat excepteur eu aliquip. Nulla non ipsum in id eu consequat sint do non tempor aute incididunt do duis. Nostrud veniam ea in do aliqua mollit sit magna qui.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -162,12 +177,15 @@
   {
     "Username": "Roy",
     "Gender": "male",
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Roy",
     "Created": "2017-08-03",
     "LastActive": "2017-08-03",
     "Introduction": "Cillum exercitation exercitation duis aliqua minim velit veniam. Veniam id exercitation excepteur dolore voluptate esse. Elit eiusmod voluptate ullamco fugiat sit cillum deserunt et.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -194,12 +212,15 @@
   {
     "Username": "Duke",
     "Gender": "male",
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Duke",
     "Created": "2017-07-07",
     "LastActive": "2017-07-07",
     "Introduction": "Dolor voluptate enim laborum duis proident commodo sit. Sint cupidatat Lorem ullamco dolor qui proident. Consectetur fugiat ut ipsum ullamco ut magna minim consectetur consectetur. Quis labore nostrud minim dolor.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -226,12 +247,15 @@
   {
     "Username": "Lloyd",
     "Gender": "male",
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Lloyd",
     "Created": "2017-08-22",
     "LastActive": "2017-08-22",
     "Introduction": "Nostrud reprehenderit mollit magna incididunt nulla mollit ad do ullamco ipsum reprehenderit consequat minim. Nisi id est et consequat reprehenderit tempor fugiat aliquip mollit aute consectetur culpa. Ut amet aliqua minim magna. Velit dolore consectetur culpa ea magna nisi eu sit velit.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -258,12 +282,15 @@
   {
     "Username": "Larsen",
     "Gender": "male",
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Larsen",
     "Created": "2017-02-17",
     "LastActive": "2017-02-17",
     "Introduction": "Mollit cillum ex eiusmod magna et dolor sit duis velit pariatur enim anim occaecat. Excepteur excepteur ut dolor nisi consequat mollit quis. Nisi irure quis et id amet aliqua.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -290,12 +317,15 @@
   {
     "Username": "Simon",
     "Gender": "male",
-    "P@ssw0rd": "P@ssw0rd",
+    "Password": "P@ssw0rd",
     "KnownAs": "Simon",
     "Created": "2017-06-27",
     "LastActive": "2017-06-27",
     "Introduction": "Aliqua nisi labore tempor adipisicing. Lorem in ut enim quis dolor magna commodo nisi ad voluptate et excepteur aliqua. Ea nostrud velit laborum sit nisi cillum proident nisi.\r\n",
-    "Focus": [{ "Name": "Bodybuilding" }, { "Name": "HIIT" }],
+    "Focus": [
+      { "Name": "Bodybuilding" },
+      { "Name": "HIIT" }
+    ],
     "IsTrainer": true,
     "Address": {
       "FullAddress": "16912 81 a ave Vancouver, BC Canada",
@@ -311,12 +341,59 @@
         "Description": "I am personal trainer with NASM",
         "Created": "2017-01-21"
       }
-    ],
-    "Photo": {
-      "url": "https://randomuser.me/api/portraits/men/14.jpg",
-      "isMain": true,
-      "description": "Nulla nisi tempor sint cillum aliqua esse aute."
+    ]
+  },
+
+  {
+    "Username": "mark",
+    "Gender": "male",
+    "Password": "P@ssw0rd",
+    "KnownAs": "mark",
+    "Created": "2017-06-27",
+    "LastActive": "2017-06-27",
+
+    "IsTrainer": false,
+    "Address": {
+      "FullAddress": "16912 81 a ave Vancouver, BC Canada",
+      "City": "Vancouver",
+      "Country": "Canada",
+      "Province": "BC"
+    }
+  },
+
+  {
+    "Username": "tom",
+    "Gender": "male",
+    "Password": "P@ssw0rd",
+    "KnownAs": "tom",
+    "Created": "2017-06-27",
+    "LastActive": "2017-06-27",
+
+    "IsTrainer": false,
+    "Address": {
+      "FullAddress": "16912 81 a ave Vancouver, BC Canada",
+      "City": "Vancouver",
+      "Country": "Canada",
+      "Province": "BC"
     },
-    "AdsBidding": 0
+    "ReviewsSend": []
+  },
+  {
+    "Username": "byron",
+    "Gender": "male",
+    "Password": "P@ssw0rd",
+    "KnownAs": "byron",
+    "Created": "2017-06-27",
+    "LastActive": "2017-06-27",
+
+    "IsTrainer": false,
+    "Address": {
+      "FullAddress": "16912 81 a ave Vancouver, BC Canada",
+      "City": "Vancouver",
+      "Country": "Canada",
+      "Province": "BC"
+    }
   }
+  
 ]
+    
