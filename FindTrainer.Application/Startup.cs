@@ -223,6 +223,8 @@ namespace FindTrainer.Application
                 UserName = "Admin"
             }, "P@ssw0rd");
 
+            var admin = await _userManager.FindByNameAsync("Admin");
+            await _userManager.AddToRoleAsync(admin, Constants.Roles.Admin);
         }
 
         private async Task SeedRoles()

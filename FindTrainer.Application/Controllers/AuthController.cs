@@ -78,6 +78,10 @@ namespace FindTrainer.Application.Controllers
 
             IdentityResult userCreationResult = await _userManager.CreateAsync(newUser, input.Password);
 
+            if (!userCreationResult.Succeeded)
+            {
+                return BadRequest(userCreationResult.Errors.First());
+            }
             if (input.IsTrainer)
             {
                 await _userManager.AddToRoleAsync(newUser, Constants.Roles.Trainer);
@@ -105,7 +109,7 @@ namespace FindTrainer.Application.Controllers
             DateTime today = DateTime.Now.Date;
             NewSignup record = (await _newSignupRepo.Get(x => x.SignupDate == today)).SingleOrDefault();
 
-            if(record == null)
+            if (record == null)
             {
                 record = new NewSignup()
                 {
@@ -146,7 +150,7 @@ namespace FindTrainer.Application.Controllers
         [AllowAnonymous()]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto input)
         {
-            
+
             var signInResult = await _signInManager.PasswordSignInAsync(input.Username, input.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (!signInResult.Succeeded)
