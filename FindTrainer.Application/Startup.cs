@@ -77,7 +77,7 @@ namespace FindTrainer.Application
                     ValidateIssuerSigningKey = true,
                     RequireExpirationTime = true,
                     NameClaimType = "Roles"
-            };
+                };
             });
 
 
@@ -197,6 +197,8 @@ namespace FindTrainer.Application
                 userToUpdate.Address = user.Address;
                 userToUpdate.Photo = user.Profile;
                 userToUpdate.Certifications = user.Certifications;
+                userToUpdate.Created = user.Created;
+                userToUpdate.LastActive = user.LastActive;
 
 
                 if (user.Focus != null && user.Focus.Count() > 0)

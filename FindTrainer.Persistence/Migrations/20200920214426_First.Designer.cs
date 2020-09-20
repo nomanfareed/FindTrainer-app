@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FindTrainer.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200920183433_First")]
+    [Migration("20200920214426_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
