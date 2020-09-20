@@ -9,6 +9,6 @@ namespace FindTrainer.Domain.Entities
         public string Title { get; set; }
         public DateTime Created { get; set; }
 
-        public int UserId { get; set; }
+        public int trainerId { get; set; }
     }
 }

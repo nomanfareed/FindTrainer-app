@@ -88,7 +88,7 @@ namespace FindTrainer.Persistence
             builder.Entity<Certification>().Property(x => x.Title).IsRequired();
             builder.Entity<Certification>().Property(x => x.Created).IsRequired();
 
-            builder.Entity<ApplicationUser>().HasMany(x => x.Certifications).WithOne().HasForeignKey(x => x.UserId);
+            builder.Entity<ApplicationUser>().HasMany(x => x.Certifications).WithOne().HasForeignKey(x => x.trainerId);
 
             builder.Entity<Review>().Property(x => x.Content).IsRequired();
             builder.Entity<Review>().Property(x => x.Stars).IsRequired();

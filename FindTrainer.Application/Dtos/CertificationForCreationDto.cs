@@ -12,5 +12,7 @@ namespace FindTrainer.Application.Dtos
         [Required]
         [StringLength(90, MinimumLength = 2, ErrorMessage = "You must write the title characters length between 2 and 90 characters")]
         public string Title { get; set; }
+
+        public int? TrainerId { get; set; }
     }
 }

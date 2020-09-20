@@ -44,7 +44,7 @@ namespace FindTrainer.Application.Controllers
             var photo = await _photoQuery.Get(photoId);
             if (photo == null)
             {
-                return NotFound();
+                return NotFound("No such a photo with the specified ID");
             }
 
             var photoDto = _mapper.Map<PhotoForReturnDto>(photo);
@@ -79,14 +79,14 @@ namespace FindTrainer.Application.Controllers
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            ApplicationUser currentUser = await _userManager.FindByIdAsync(UserId.ToString());
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(CurrentUserId.ToString());
             currentUser.Photo = photo;
             await _userManager.UpdateAsync(currentUser);
 
             var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
             
             
-            return CreatedAtRoute("GetPhoto", new { userId = UserId, id = photo.Id }, photoToReturn);
+            return CreatedAtRoute("GetPhoto", new { userId = CurrentUserId, id = photo.Id }, photoToReturn);
             
         }
 
