@@ -38,7 +38,8 @@ namespace FindTrainer.Application.Controllers
             _photoRepo = photoRepo;
         }
 
-        [HttpGet("{photoId}", Name = "GetPhoto")]
+        [HttpGet("/{photoId}", Name = "GetPhoto")]
+        [Authorize(Roles = "Admin, Trainer, User")]
         public async Task<IActionResult> GetPhoto(int photoId)
         {
             var photo = await _photoQuery.Get(photoId);
@@ -54,6 +55,7 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpPost("Add")]
+        [Authorize(Roles = "Admin, Trainer, User")]
         public async Task<IActionResult> AddPhotoForUser([FromForm] PhotoForCreationDto photoForCreationDto)
         {
             var file = photoForCreationDto.File;

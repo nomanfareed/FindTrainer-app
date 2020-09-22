@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Data\UserSeedData.json" />
   </ItemGroup>
 
@@ -24,10 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FindTrainer.Domain\FindTrainer.Domain.csproj" />
     <ProjectReference Include="..\FindTrainer.Persistence\FindTrainer.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>

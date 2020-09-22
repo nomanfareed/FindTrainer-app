@@ -11,7 +11,7 @@ namespace FindTrainer.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    
     public class StatisticsController : ApplicationController
     {
         private readonly ReadOnlyQuery<NewSignup> _newSignupsQuery;
@@ -26,6 +26,7 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpGet("NewSignupsCount")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetNewSignupsCount(DateTime from, DateTime to)
         {
             int count = await _newSignupsQuery.Query.Where(x => x.SignupDate >= from && x.SignupDate <= to).SumAsync(x => x.UserNumber);
@@ -35,6 +36,7 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpGet("SigninsCount")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetNewSigninsCount(DateTime from, DateTime to)
         {
             int count = await _signinsQuery.Query.Where(x => x.SigninDate >= from && x.SigninDate <= to).SumAsync(x => x.UserNumber);

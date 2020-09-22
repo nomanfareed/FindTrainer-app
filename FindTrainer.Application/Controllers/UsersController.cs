@@ -49,6 +49,7 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "Admin, Trainer, User")]
         public async Task<IActionResult> UpdateUser(UserDefaultIntakeDto userForUpdateDto)
         {
             ApplicationUser currentUser = await _usersReop.DataSet.Where(usr => usr.Id == CurrentUserId)
@@ -63,6 +64,7 @@ namespace FindTrainer.Application.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin,Trainer,User")]
         public async Task<IActionResult> DeleteUser()
         {
             ApplicationUser user = await _userManager.FindByIdAsync(CurrentUserId.ToString());

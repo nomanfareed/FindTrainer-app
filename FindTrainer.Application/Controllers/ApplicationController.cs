@@ -1,13 +1,12 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FindTrainer.Application.Controllers
 {
-    [Authorize]
     public abstract class ApplicationController : ControllerBase
     {
-        protected int CurrentUserId => int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+        protected int CurrentUserId => int.Parse(HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Single().Value);
     }
 }

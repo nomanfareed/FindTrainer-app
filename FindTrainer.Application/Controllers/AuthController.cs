@@ -178,8 +178,10 @@ namespace FindTrainer.Application.Controllers
 
             List<Claim> claims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
 
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, usr.Id.ToString()));
-            claims.Add(new Claim(ClaimTypes.Name, usr.UserName));
+            foreach(string role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             return claims;
         }

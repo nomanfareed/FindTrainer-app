@@ -48,6 +48,8 @@ namespace FindTrainer.Application
             services.AddDbContext<DataContext>(options =>
                      options.UseSqlite("Data Source=FindTrainerData.db"));
 
+            services.AddCors();
+
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
@@ -85,10 +87,6 @@ namespace FindTrainer.Application
             services.AddScoped(typeof(ReadOnlyQuery<>));
             services.AddScoped(typeof(Repository<>));
 
-            var key = new OpenApiSecurityScheme() { Name = "api key" };
-            var requirement = new OpenApiSecurityRequirement {
-    { key, new List<string>() }
-};
 
             services.AddSwaggerGen(c =>
             {
@@ -98,11 +96,13 @@ namespace FindTrainer.Application
                     {
                         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
                         Description = "Please enter into field the word 'Bearer' following by space and JWT",
-                        Name = "Authorization",
+                        Name = "Authentication",
                         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
                     });
-                c.AddSecurityRequirement(requirement);
+
             });
+
+            services.AddCors();
 
 
         }
@@ -117,10 +117,13 @@ namespace FindTrainer.Application
             app.UseCors(x => x.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
+            app.UseRouting();
 
-            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseAuthorization();
+
 
             app.UseSwagger();
 
@@ -229,11 +232,25 @@ namespace FindTrainer.Application
 
         private async Task SeedRoles()
         {
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Admin, NormalizedName = Constants.Roles.Admin });
+            IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Admin, NormalizedName = Constants.Roles.Admin });
 
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
+            if(!result.Succeeded)
+            {
+                throw new Exception("Failed to seed roles");
+            }
 
-            await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Trainer, NormalizedName = Constants.Roles.Trainer });
+            result = await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.User, NormalizedName = Constants.Roles.User });
+            if (!result.Succeeded)
+            {
+                throw new Exception("Failed to seed roles");
+            }
+
+            result = await _roleManager.CreateAsync(new ApplicationRole() { Name = Constants.Roles.Trainer, NormalizedName = Constants.Roles.Trainer });
+
+            if (!result.Succeeded)
+            {
+                throw new Exception("Failed to seed roles");
+            }
         }
     }
 }
