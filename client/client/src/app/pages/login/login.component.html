@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form
+        class="needs-validation"
+        [formGroup]="loginForm"
+        (ngSubmit)="submitFunc()"
+      >
+        <!-- Email -->
+        <div class="mb-3">
+          <app-text-input
+            [formControl]="loginForm.controls['email']"
+            [label]="'Email'"
+            [type]="'email'"
+          >
+          </app-text-input>
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+          <app-text-input
+            [formControl]="loginForm.controls['password']"
+            [label]="'Password'"
+            [type]="'password'"
+          >
+          </app-text-input>
+        </div>
+        <hr class="mb-4" />
+        <button
+          *ngIf="!isLoading"
+          class="btn btn-lg btn-block btn-warning"
+          [disabled]="!loginForm.valid"
+          type="submit"
+        >
+          Submit
+        </button>
+        <div class="col-12 text-center">
+          <!-- <img
+            src="../../../assets/loading.gif"
+            style="height: 50px; width: 50ox"
+          /> -->
+        </div>
+      </form>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

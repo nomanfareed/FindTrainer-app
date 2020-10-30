@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form
+        class="needs-validation"
+        [formGroup]="signUpForm"
+        (ngSubmit)="submitFunc()"
+      >
+        <!-- Name -->
+        <div class="mb-3">
+          <app-text-input
+            [formControl]="signUpForm.controls['name']"
+            [label]="'Full Name'"
+          ></app-text-input>
+        </div>
+        <!-- Gender -->
+        <div class="mb-3">
+          <label>Gender</label>
+          <select
+            class="custom-select"
+            [ngClass]="{
+              'is-invalid':
+                signUpForm.get('gender').errors &&
+                signUpForm.get('gender').touched
+            }"
+            formControlName="gender"
+          >
+            <option disabled>Choose your gender</option>
+            <option [ngValue]="0">Female</option>
+            <option [ngValue]="1">Male</option>
+          </select>
+          <div class="invalid-feedback">Please enter a valid Username</div>
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+          <app-text-input
+            [formControl]="signUpForm.controls['email']"
+            [label]="'Email'"
+            [type]="'email'"
+          ></app-text-input>
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+          <app-text-input
+            [formControl]="signUpForm.controls['password']"
+            [label]="'Password'"
+            [type]="'password'"
+          ></app-text-input>
+        </div>
+        <!-- Role -->
+        <div class="radioButton mb-3">
+          <label for="role">Role</label><br />
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="role"
+              id="inlineRadio1"
+              formControlName="role"
+              [value]="1"
+            />
+            <label class="form-check-label" for="inlineRadio1"
+              >Certified Personal Trainer</label
+            >
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="role"
+              id="inlineRadio2"
+              value="option2"
+              formControlName="role"
+              [value]="0"
+            />
+            <label class="form-check-label" for="inlineRadio2"
+              >Looking for Trainer</label
+            >
+          </div>
+        </div>
+        <hr class="mb-4" />
+        <button
+          class="btn btn-lg btn-block btn-warning"
+          [disabled]="!signUpForm.valid"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

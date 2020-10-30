@@ -1,0 +1,8 @@
+<app-display-certifications
+  *ngIf="allCerts.length > 0"
+  [allcertifications]="allCerts"
+></app-display-certifications>
+<app-error
+  [header]="'No Certifications found.'"
+  *ngIf="allCerts.length === 0"
+></app-error>

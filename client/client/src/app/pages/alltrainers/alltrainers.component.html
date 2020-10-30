@@ -1,0 +1,149 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="mx-auto mb-4 form-inline">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <input
+          formControlName="search"
+          class="form-control mr-2"
+          style="width: 500px"
+          placeholder="Search Name (Must be exact name)"
+          type="text"
+        />
+        <button type="submit" class="btn btn-outline-primary my-2">
+          Search
+        </button>
+        <button
+          (click)="onResetComplete()"
+          class="btn btn-outline-danger ml-2 my-2"
+          *ngIf="isSearched"
+        >
+          Reset
+        </button>
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn btn-outline-success ml-2 my-2"
+          *ngIf="!isSearched"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Advanced Search
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Advanced Search
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3 form-inline">
+                  <label for="gender" class="mr-3"><b>Gender</b></label>
+                  <select class="custom-select" formControlName="gender">
+                    <option [ngValue]="0">Female</option>
+                    <option [ngValue]="1">Male</option>
+                    <option [ngValue]="2">Any</option>
+                  </select>
+                </div>
+                <div class="mb-3 form-inline">
+                  <label for="onlineTraining" class="mr-3"
+                    ><b>Offer Online Training</b></label
+                  >
+                  <select
+                    class="custom-select"
+                    formControlName="onlineTraining"
+                  >
+                    <option [ngValue]="0">Yes</option>
+                    <option [ngValue]="1">No</option>
+                    <option [ngValue]="2">Both</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" type="submit" class="btn btn-primary">
+                  Apply Filter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <section class="col-1"></section>
+    <section class="col-10">
+      <div class="d-flex justify-content-between align-items-center pb-2"></div>
+      <div class="row grid-container grid-container--fill">
+        <div class="grid-element" *ngFor="let item of trainers">
+          <app-trainer-item [currentTrainer]="item"></app-trainer-item>
+        </div>
+      </div>
+      <div class="mt-2 text-right" *ngIf="!isSinglePage">
+        <hr />
+        <button
+          class="mr-2 btn btn-outline-primary"
+          (click)="getPrevious()"
+          [disabled]="filterParams.FirstItem.length === 0"
+        >
+          <i class="fas fa-backward mr-2"></i>Previous
+        </button>
+        <button
+          [disabled]="trainers.length < filterParams.PageSize"
+          class="btn btn-outline-primary"
+          (click)="getNext()"
+        >
+          Next <i class="ml-2 fas fa-forward"></i>
+        </button>
+      </div>
+    </section>
+    <section class="col-1"></section>
+  </div>
+</div>
+<!-- <app-paging-header
+          [totalCount]="totalCount"
+          [pageSize]="this.shopParams.pageSize"
+          [pageNumber]="this.shopParams.pageNumber"
+        ></app-paging-header>
+<div class="form-inline">
+          <input
+            (keyup.enter)="onSearch()"
+            class="form-control mr-2"
+            #search
+            style="width: 300px"
+            placeholder="Search"
+            type="text"
+          />
+          <button (click)="onSearch()" class="btn btn-outline-primary my-2">
+            Search
+          </button>
+          <button (click)="onReset()" class="btn btn-outline-success ml-2 my-2">
+            Reset
+          </button>
+        </div>
+       -->

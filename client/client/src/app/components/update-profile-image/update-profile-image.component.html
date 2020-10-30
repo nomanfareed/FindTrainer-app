@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem; height: 25rem">
+  <img class="card-img-top" [src]="imageUrl" alt="Profile Image" />
+  <div class="card-body">
+    <app-upload-image
+      [label]="'Upload Profile Image'"
+      (urlSubmit)="onChangeImage($event)"
+    ></app-upload-image>
+  </div>
+</div>

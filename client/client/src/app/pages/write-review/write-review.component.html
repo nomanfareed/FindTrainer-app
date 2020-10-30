@@ -1,0 +1,42 @@
+<form
+  class="needs-validation"
+  [formGroup]="ReviewForm"
+  (ngSubmit)="submitFunc()"
+>
+  <!-- Stars -->
+  <div class="mb-3">
+    <label>Rating score</label>
+    <select
+      class="custom-select"
+      [ngClass]="{
+        'is-invalid':
+          ReviewForm.get('stars').errors && ReviewForm.get('stars').touched
+      }"
+      formControlName="stars"
+    >
+      <option disabled>Choose a rating score</option>
+      <option [ngValue]="item" *ngFor="let item of maxScore">
+        {{ item }} star(s)
+      </option>
+    </select>
+    <div class="invalid-feedback">Please enter a valid rating score</div>
+  </div>
+  <!-- content -->
+  <div class="mb-3">
+    <app-text-area
+      [formControl]="ReviewForm.controls['content']"
+      [label]="'Your review'"
+      [placeholder]="
+        'Your review helps others to learn more about this trainer.'
+      "
+    ></app-text-area>
+  </div>
+  <hr class="mb-4" />
+  <button
+    class="btn btn-lg btn-block btn-warning"
+    [disabled]="!ReviewForm.valid"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>

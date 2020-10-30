@@ -1,0 +1,73 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-primary btn-block"
+  data-toggle="modal"
+  data-target="#exampleModal"
+>
+  {{ label }}
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container">
+        <input type="file" (change)="fileChangeEvent($event)" #myInput />
+
+        <div class="row" *ngIf="imageExists">
+          <div class="col-4">
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 4"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (loadImageFailed)="loadImageFailed()"
+              class="rounded border"
+            ></image-cropper>
+          </div>
+          <div class="col-8">
+            <img [src]="croppedImage" class="image-display rounded border" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          (click)="reset()"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="done()"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

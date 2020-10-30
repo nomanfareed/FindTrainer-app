@@ -1,0 +1,16 @@
+.main {
+  margin: auto;
+  width: 50%;
+  margin-top: 2rem;
+  text-align: center;
+}
+img {
+  width: 80%;
+  margin: auto;
+}
+.child {
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  margin: auto;
+}

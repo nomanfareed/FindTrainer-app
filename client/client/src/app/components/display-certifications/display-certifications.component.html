@@ -1,0 +1,28 @@
+<div class="card mb-2" *ngFor="let item of allcertifications">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <img
+            alt="Fitness Organization"
+            [src]="getCertImage(item?.organization)"
+            class="img-thumbnail"
+          />
+        </div>
+        <div class="col-9">
+          <h5 class="card-title">{{ item?.title }}</h5>
+          <span class="text-secondary">{{ item?.organization }}</span>
+          <p class="card-text mt-2">
+            {{ item?.created | date }} -
+            {{ item?.neverExpire ? "Present" : (item?.expired | date) }}
+          </p>
+        </div>
+        <div class="col-1" *ngIf="canDelete">
+          <button class="btn btn-danger mt-2" (click)="deleteItem(item?.uid)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<form
+  class="needs-validation"
+  [formGroup]="messageForm"
+  (ngSubmit)="submitFunc()"
+>
+  <!-- Name -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="messageForm.controls['name']"
+      [label]="'Full Name'"
+    ></app-text-input>
+  </div>
+  <!-- Email -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="messageForm.controls['email']"
+      [label]="'Email'"
+      [type]="'email'"
+    ></app-text-input>
+  </div>
+  <!-- phone number -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="messageForm.controls['phoneNumber']"
+      [label]="'Phone Number'"
+    ></app-text-input>
+  </div>
+  <!-- Title -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="messageForm.controls['title']"
+      [label]="'Title'"
+    ></app-text-input>
+  </div>
+  <!-- Messages -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="messageForm.controls['message']"
+      [label]="'Message'"
+    ></app-text-input>
+  </div>
+
+  <hr class="mb-4" />
+  <button
+    class="btn btn-lg btn-block btn-warning"
+    [disabled]="!messageForm.valid"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>

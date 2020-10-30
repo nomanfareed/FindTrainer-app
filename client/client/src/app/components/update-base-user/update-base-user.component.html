@@ -1,0 +1,39 @@
+<form
+  class="needs-validation"
+  [formGroup]="AccountForm"
+  (ngSubmit)="submitFunc()"
+>
+  <!-- Name -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="AccountForm.controls['name']"
+      [label]="'Full Name'"
+    ></app-text-input>
+  </div>
+  <!-- Gender -->
+  <div class="mb-3">
+    <label>Gender</label>
+    <select
+      class="custom-select"
+      [ngClass]="{
+        'is-invalid':
+          AccountForm.get('gender').errors && AccountForm.get('gender').touched
+      }"
+      formControlName="gender"
+    >
+      <option disabled>Choose your gender</option>
+      <option [ngValue]="0">Female</option>
+      <option [ngValue]="1">Male</option>
+    </select>
+    <div class="invalid-feedback">Please enter a valid Username</div>
+  </div>
+
+  <hr class="mb-4" />
+  <button
+    class="btn btn-lg btn-block btn-warning"
+    [disabled]="!AccountForm.valid"
+    type="submit"
+  >
+    Save
+  </button>
+</form>

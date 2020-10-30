@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "findtrainer-fb4af",
+  "private_key_id": "97c1397498099a20f23441bdec0fdd41dc6b1033",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQD2OPd/marwfeuW\nJFRDVXHIodcfKsUuBODZd8Xtbkujpn4uaMD0k+2KpxN46oiNYVx81zQAPNc1jife\n2xl3a+PViqPAEFnokdQcaCxutH8y0JEMZPcnVjk34HrJFGMGwpGLo4WJSglykCfb\ntr+dlFdY93E9nkUNdqAKpk5o0oHYTk3gtaxTvsov1XmzHEBB3k9OGcFV8cg9HsCw\nNTOYFKLV5TdQiLXFka6jBOcak/50ILKN78pUzeQRwKzx1ta45gXpTMlL4j/6UfqR\n5naw8pWbQC22NPyCYWKYCddqogv8NhV7fHmxgM98c1KNVxkScPU371FToaXakj+R\nq1fGSF8dAgMBAAECggEACg3BbWBk7nT1zaemGSm//6U8F3Wzn3FrjPWrC0rZo9EE\njfiRCGuR43t2/BT3hm5XTHGtGeViFDm9vwfLPmkVYH7MuObyBOEPfCl0xwBvwS9q\n/MqSnPSUWYe8+8DtWjVPpBgFN9niEN96ASqxIEoSVvujkBSKVUZmuoiX4wfVbXOQ\nkZXT7of8Tz9Gv/6AXRsRb8zkZhC7WNi6U+dDHKJNeWpUdvXpcBAUgWcyZhFmTgdm\n+7ai9tHXWmxatx5ASw4Tf2kBnFSuoK9G+0bSrj9Mi7oEzCIeI8cCfDm3NO5lYoUY\nNwNQUyIgve3tpChLasSg9yJPnRZa4BjFdh/FRCVxsQKBgQD8vXVd4ovwGYrOOsnW\nj4GEjhJnpQ8Mw1ZvgXBSym4ZyZYoYu2htpoys8NbinHEe2okIP1Fkn/7jHrWno/k\nIe6ug0W1Htm2Rb4Cir2uu4ClKTRZya8xdIG4bjcEZL8nOYlX+yNvfpmjcIxOl+P1\n9BieIqH3auRTHGlAmIjGBfHvBwKBgQD5ZfzQITr/qUXjBo1O8rQtlbaXBDKSwz8F\nWwFux8Z6Jrsr4wvs1pIGUNzso0k44NMouPEdTSITvGdnBYErGToQFNr5pPgu4lCn\nCtAzAFpUacPWZYwUufYGdTA/cgakYsW79d6m2woBkNAYzjuxLOG9qLIcW7tp2b7Z\nk/6oVhTTuwKBgBKA1FzhPxl+5Tif+TLqIrNPq21HGkj27BcRxOVqyJC+v22JgJg8\nRCG+I2lKQ3X9CxJGEATN6uzBpiScSzCKg2znU20lKw87H+QTwDtQouR0lc6VA2x9\neRnFh+Wccpouji2Qx1FcVWcv0DXYzOmuyzaYln8Epl6nT9VY1XqZ6NJ1AoGANl5c\naccExJ1TRfW0soRIcTOVFYDtwX7c6z72pf7ZLuHopd2eSOhR9xyDvPavzL1+av8+\nWQPqrODCrfvON+YM+VqCji+/hwEBUhkSYDvwdTyFW+TRT+dmUewUM5CZEBcUQjCM\ndFWF7edy5iV3b9137M+s3G/HAIFekLIprurtKWcCgYBY86DxhTSV8cmRNI4cK1sr\nINNI1GndC5GNZRpWgBZxwr0YhuXV3RnY3aTvg6pkwJolxczTfiWI3R5TpWZ1K2vn\nIhzmaMdkpQL40cZXG9PmQze1NvymHIosi6mdxPwBVtR2GZo2lWSG/OwYa0dPQlSn\nQ49/9xUDpsnw5vzWD+3mkw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-k536g@findtrainer-fb4af.iam.gserviceaccount.com",
+  "client_id": "100350855859989369222",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-k536g%40findtrainer-fb4af.iam.gserviceaccount.com"
+}

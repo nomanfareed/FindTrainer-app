@@ -1,0 +1,19 @@
+.grid-container {
+  display: grid;
+}
+
+.grid-container--fill {
+  grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+}
+
+.grid-element {
+  margin: 1rem;
+}
+.btn-paging {
+  border-radius: 0px;
+  border: 1px black;
+}
+.float-right {
+  float: right;
+  width: 40%;
+}

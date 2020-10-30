@@ -1,0 +1,131 @@
+<button
+  type="button"
+  class="btn btn-outline-secondary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+>
+  {{ isAdd ? "Add" : "Edit" }} Certification
+</button>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Certification</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form
+        class="needs-validation"
+        [formGroup]="certificationForm"
+        (ngSubmit)="isAdd ? addCertification() : editCertification()"
+      >
+        <div class="modal-body">
+          <!-- title -->
+          <div class="mb-3">
+            <app-text-input
+              [formControl]="certificationForm.controls['title']"
+              [label]="'Title'"
+            ></app-text-input>
+          </div>
+          <!-- organization -->
+          <div class="mb-3">
+            <label>Organization</label>
+            <select
+              class="custom-select"
+              [ngClass]="{
+                'is-invalid':
+                  certificationForm.get('organization').errors &&
+                  certificationForm.get('organization').touched
+              }"
+              formControlName="organization"
+            >
+              <option disabled>Choose your organization</option>
+              <option
+                *ngFor="let item of listOrganizations"
+                [ngValue]="item.name"
+              >
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+          <!-- created -->
+          <div class="mb-3">
+            <app-date-input
+              [label]="'Issued Date'"
+              [formControl]="certificationForm.controls['created']"
+            >
+            </app-date-input>
+          </div>
+          <!-- Never Expire -->
+          <div class="radioButton mb-3">
+            <label for="neverExpire">No Expiration Date</label><br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="neverExpire"
+                id="inlineRadio1"
+                formControlName="neverExpire"
+                [value]="true"
+              />
+              <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="neverExpire"
+                id="inlineRadio2"
+                value="option2"
+                formControlName="neverExpire"
+                [value]="false"
+              />
+              <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+          </div>
+          <!-- expired -->
+          <div
+            class="mb-3"
+            *ngIf="this.certificationForm.get('neverExpire').value === false"
+          >
+            <app-date-input
+              [label]="'Expire Date'"
+              [formControl]="certificationForm.controls['expired']"
+            >
+            </app-date-input>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!certificationForm.valid"
+            >
+              {{ isAdd ? "Add" : "Edit" }} Certification
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<form
+  class="needs-validation"
+  [formGroup]="TrainerFormAccount"
+  (ngSubmit)="submitFunc()"
+>
+  <!-- City -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['city']"
+      [label]="'City'"
+    ></app-text-input>
+  </div>
+  <!-- Country -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['Country'.toLowerCase()]"
+      [label]="'Country'"
+    ></app-text-input>
+  </div>
+  <!-- Province -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['Province'.toLowerCase()]"
+      [label]="'Province'"
+    ></app-text-input>
+  </div>
+  <!-- FullAddress -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['fullAddress']"
+      [label]="'Full Address'"
+    ></app-text-input>
+  </div>
+  <!-- onlineTraining -->
+  <div class="mb-3">
+    <label>Online Training</label>
+    <select
+      class="custom-select"
+      [ngClass]="{
+        'is-invalid':
+          TrainerFormAccount.get('onlineTraining').errors &&
+          TrainerFormAccount.get('onlineTraining').touched
+      }"
+      formControlName="onlineTraining"
+    >
+      <option disabled>Do you offer online Personal Training?</option>
+      <option [ngValue]="true">Yes</option>
+      <option [ngValue]="false">No</option>
+    </select>
+    <div class="invalid-feedback">Please enter a valid option</div>
+  </div>
+  <!-- Focus -->
+  <app-multiselect
+    [dataArr]="dataArr"
+    [existedArr]="initData.focus"
+    [limit]="5"
+    [label]="'focus'"
+    (deselectFunction)="deselect($event)"
+    (selectFunction)="select($event)"
+  ></app-multiselect>
+  <hr class="mb-4" />
+  <button
+    class="btn btn-lg btn-block btn-warning"
+    [disabled]="!TrainerFormAccount.valid"
+    type="submit"
+  >
+    Save
+  </button>
+</form>

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-7">
+      <div class="card">
+        <div class="card-header"><b>My Account</b></div>
+        <div class="card-body">
+          <app-update-trainer [fullData]="userData"></app-update-trainer>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <app-update-profile-image
+        [fullData]="userData"
+      ></app-update-profile-image>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header"><b>Account Basics</b></div>
+        <div class="card-body">
+          <app-update-base-user [fullData]="userData"></app-update-base-user>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

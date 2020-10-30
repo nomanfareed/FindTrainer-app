@@ -1,0 +1,14 @@
+<form [formGroup]="myForm">
+  <label>{{ label | titlecase }}</label>
+  <ng-multiselect-dropdown
+    [settings]="dropdownSettings"
+    [placeholder]="'Select your ' + label"
+    [data]="allData"
+    [(ngModel)]="selectedItems"
+    [formControl]="myForm.controls[label]"
+    [disabled]="false"
+    (onSelect)="onItemSelect($event)"
+    (onDeSelect)="onItemDeSelect($event)"
+  >
+  </ng-multiselect-dropdown>
+</form>

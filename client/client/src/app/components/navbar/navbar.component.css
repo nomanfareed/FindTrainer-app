@@ -1,0 +1,15 @@
+.auth {
+  margin-left: 1%;
+}
+
+.navbar {
+  padding-left: 3%;
+  padding-right: 4%;
+  padding-bottom: 0.8%;
+  padding-top: 0.8%;
+  margin-bottom: 2%;
+}
+
+a:active {
+  color: white;
+}
