@@ -5,10 +5,8 @@ using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -178,7 +176,7 @@ namespace FindTrainer.Application.Controllers
 
             List<Claim> claims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
 
-            foreach(string role in roles)
+            foreach (string role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
