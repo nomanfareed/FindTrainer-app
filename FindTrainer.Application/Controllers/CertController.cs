@@ -31,19 +31,19 @@ namespace FindTrainer.Application.Controllers
         }
         [HttpPost("Add")]
 
-        [Authorize(Roles = "Trainer, Amin")]
+        [Authorize(Roles = "Trainer, Admin")]
         public async Task<IActionResult> AddCert([FromBody] CertificationForCreationDto input)
         {
             var certification = _mapper.Map<Certification>(input);
 
-            if(User.IsInRole("Admin"))
+            if (User.IsInRole("Admin"))
             {
-                if(!input.TrainerId.HasValue)
+                if (!input.TrainerId.HasValue)
                 {
                     return BadRequest("Please specify the trainer id to add certificate to");
                 }
 
-                if(!await IsTrainer(input.TrainerId.Value))
+                if (!await IsTrainer(input.TrainerId.Value))
                 {
                     return NotFound("No such a trainer with specified ID");
                 }
@@ -51,8 +51,10 @@ namespace FindTrainer.Application.Controllers
                 certification.trainerId = input.TrainerId.Value;
             }
 
-            certification.trainerId = CurrentUserId;
-
+            else
+            {
+                certification.trainerId = CurrentUserId;
+            }
             await _certificationRepo.Add(certification);
 
             return Ok();
@@ -71,9 +73,16 @@ namespace FindTrainer.Application.Controllers
         [Authorize(Roles = "Admin,Trainer")]
         public async Task<IActionResult> DeleteCert(int certId)
         {
-            bool success = await _certificationRepo.Delete(cert => cert.trainerId == CurrentUserId && cert.Id == certId);
-
-            if(success)
+            bool success = false;
+            if (User.IsInRole("Admin"))
+            {
+                success = await _certificationRepo.Delete(cert => cert.Id == certId);
+            }
+            else
+            {
+                success = await _certificationRepo.Delete(cert => cert.trainerId == CurrentUserId && cert.Id == certId);
+            }
+            if (success)
             {
                 return Ok();
             }
@@ -86,19 +95,19 @@ namespace FindTrainer.Application.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetCertificationsForTrainer(int trainerId, int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
         {
-            if(pageSize > Constants.Paging.MaxPageSize)
+            if (pageSize > Constants.Paging.MaxPageSize)
             {
                 return BadRequest($"The maximum page size is {Constants.Paging.MaxPageSize}");
             }
 
 
             ApplicationUser user = await _userManager.FindByIdAsync(trainerId.ToString());
-            if(user == null)
+            if (user == null)
             {
                 return NotFound("Trainer does not exist");
             }
 
-            if(!user.IsTrainer.HasValue || !user.IsTrainer.Value)
+            if (!user.IsTrainer.HasValue || !user.IsTrainer.Value)
             {
                 return NotFound("Invalid trainer ID");
             }

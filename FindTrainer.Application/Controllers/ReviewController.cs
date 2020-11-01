@@ -33,7 +33,7 @@ namespace FindTrainer.Application.Controllers
         public async Task<IActionResult> AddReview(ReviewForCreationDto reviewIntake)
         {
 
-            if(await UserAlreadyReviewed(reviewIntake.RecieverId))
+            if (await UserAlreadyReviewed(reviewIntake.RecieverId))
             {
                 return Unauthorized("You already gave a review to this person");
             }
@@ -64,9 +64,16 @@ namespace FindTrainer.Application.Controllers
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
-            bool success = await _reviewsRepo.Delete(reviewId);
-
-            if(!success)
+            bool success = false;
+            if (User.IsInRole("Admin"))
+            {
+                success = await _reviewsRepo.Delete(reviewId);
+            }
+            else
+            {
+                success = await _reviewsRepo.Delete(x => x.SenderId == CurrentUserId && x.Id == reviewId);
+            }
+            if (!success)
             {
                 return NotFound("Review not found");
             }
