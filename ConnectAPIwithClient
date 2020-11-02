@@ -1,0 +1,5 @@
+Inside the Angular client2 folder, we have many services in the _services folder. Your job is to write all the methods to connect 
+API to client side. There are many routes in the API, and you will write those methods to connect them in the client2 _services folder.
+
+You don't need to worry about the UI, you just need to write the method, we already have a demo in the _services/_authS, and we also have interfaces. Make sure You
+use those.
