@@ -44,6 +44,19 @@ import { DashboardAdminCertsComponent } from './pages/dashboard/dashboard-admin/
 import { DashboardAdminMessagesComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-messages/dashboard-admin-messages.component';
 import { DashboardAdminReviewsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-reviews/dashboard-admin-reviews.component';
 import { DashboardAdminStatsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-stats/dashboard-admin-stats.component';
+//Others
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown/ng-multiselect-dropdown.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RatingModule } from 'ngx-bootstrap/rating'; //Ngx-bootstrap
+import { NgxSpinnerModule } from 'ngx-spinner/lib/ngx-spinner.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ImageCropperModule } from 'ngx-image-cropper/lib/image-cropper.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -90,7 +103,30 @@ import { DashboardAdminStatsComponent } from './pages/dashboard/dashboard-admin/
     DashboardAdminReviewsComponent,
     DashboardAdminStatsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BsDatepickerModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
+    HttpClientModule,
+    RatingModule.forRoot(),
+    BrowserModule,
+    NgxSpinnerModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    RouterModule,
+    AppRoutingModule,
+    CommonModule,
+    ImageCropperModule,
+    FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+    }),
+    NgbModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
