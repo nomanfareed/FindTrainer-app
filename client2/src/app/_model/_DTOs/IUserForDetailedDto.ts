@@ -3,7 +3,6 @@ import { IAddressToReturnDto } from './IAddressToReturnDto';
 export interface IUserForDetailedDto {
   Id: number;
   Email: string;
-  Username: string;
   Focus: String[];
   Gender: string;
   KnownAs: string;
