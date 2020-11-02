@@ -7,6 +7,7 @@ namespace FindTrainer.Application.Dtos
 {
     public class UserDataModel
     {
+        public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public virtual IEnumerable<Focus> Focus { get; set; }

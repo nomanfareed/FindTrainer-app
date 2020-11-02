@@ -22,6 +22,8 @@ namespace FindTrainer.Domain.Entities.Security
 
         public virtual ICollection<Review> ReviewsSent { get; set; }
         public virtual ICollection<Review> ReviewsReceived { get; set; }
+        
+        public virtual ICollection<UserStats> UserStats { get; set; }
 
         public int? PhotoId { get; set; }
         public virtual Photo Photo { get; set; }

@@ -28,6 +28,8 @@ namespace FindTrainer.Persistence
         public DbSet<NewSignup> NewSignups { get; set; }
 
         public DbSet<UniqueSignin> UniqueSignins { get; set; }
+        
+        public DbSet<UserStats> UserStats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -106,6 +108,9 @@ namespace FindTrainer.Persistence
 
             builder.Entity<UniqueSignin>().Property(x => x.SigninDate).IsRequired();
             builder.Entity<UniqueSignin>().Property(x => x.UserNumber).IsRequired();
+            
+            builder.Entity<UserStats>().ToTable("UserStats").Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Entity<ApplicationUser>().HasMany(x => x.UserStats).WithOne(x => x.User).HasForeignKey(x => x.TrainerId);
         }
 
 

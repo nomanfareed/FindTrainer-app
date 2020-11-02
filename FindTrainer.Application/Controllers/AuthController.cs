@@ -51,17 +51,18 @@ namespace FindTrainer.Application.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto input)
         {
-            ApplicationUser existingUser = await _userManager.FindByNameAsync(input.Username);
+            ApplicationUser existingUser = await _userManager.FindByEmailAsync(input.Email);
             if (existingUser != null)
             {
-                return BadRequest(new { Message = "Username already exists" });
+                return BadRequest(new { Message = "Email already exists" });
             }
 
             var newUser = new ApplicationUser()
             {
                 Created = DateTime.Now,
                 LastActive = DateTime.Now,
-                UserName = input.Username,
+                UserName = input.Email,
+                Email = input.Email,
                 Gender = (Gender)input.Gender,
                 KnownAs = input.KnownAs,
                 Introduction = input.Introduction,
@@ -95,7 +96,7 @@ namespace FindTrainer.Application.Controllers
                 return BadRequest(userCreationError.Description);
             }
 
-            newUser = await _userManager.FindByNameAsync(newUser.UserName);
+            newUser = await _userManager.FindByEmailAsync(newUser.Email);
             await _userManager.AddToRoleAsync(newUser, Constants.Roles.User);
             await IncreaseSignupCounter();
 
@@ -149,13 +150,13 @@ namespace FindTrainer.Application.Controllers
         public async Task<IActionResult> Login([FromBody] UserForLoginDto input)
         {
 
-            var signInResult = await _signInManager.PasswordSignInAsync(input.Username, input.Password, isPersistent: false, lockoutOnFailure: false);
+            var signInResult = await _signInManager.PasswordSignInAsync(input.Email, input.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (!signInResult.Succeeded)
             {
-                return BadRequest("Wrong username or password");
+                return BadRequest("Wrong email or password");
             }
-            var claims = await GetUserClaims(input.Username);
+            var claims = await GetUserClaims(input.Email);
 
             JwtSecurityToken token = GenerateToken(claims);
 
@@ -169,9 +170,9 @@ namespace FindTrainer.Application.Controllers
             return Ok(result);
         }
 
-        private async Task<List<Claim>> GetUserClaims(string userName)
+        private async Task<List<Claim>> GetUserClaims(string email)
         {
-            ApplicationUser usr = await _userManager.FindByNameAsync(userName);
+            ApplicationUser usr = await _userManager.FindByEmailAsync(email);
             IList<string> roles = await _userManager.GetRolesAsync(usr);
 
             List<Claim> claims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();

@@ -1,6 +1,7 @@
 [
   {
     "Username": "Lola",
+    "Email":  "lola@test.com",
     "Gender": 1,
     "Password": "P@ssw0rd",
     "KnownAs": "Lola",
@@ -36,6 +37,7 @@
   },
   {
     "Username": "Dorothy",
+    "Email": "dorothy@test.com",
     "Gender": 1,
     "Password": "P@ssw0rd",
     "KnownAs": "Dorothy",
@@ -71,6 +73,7 @@
   },
   {
     "Username": "Reba",
+    "Email": "reba@test.com",
     "Gender": 1,
     "Password": "P@ssw0rd",
     "KnownAs": "Reba",
@@ -106,6 +109,7 @@
   },
   {
     "Username": "Annmarie",
+    "Email": "annmarie@test.com",
     "Gender": 1,
     "Password": "P@ssw0rd",
     "KnownAs": "Annmarie",
@@ -141,6 +145,7 @@
   },
   {
     "Username": "Ashley",
+    "Email": "ashley@test.com",
     "Gender": 1,
     "Password": "P@ssw0rd",
     "KnownAs": "Ashley",
@@ -176,6 +181,7 @@
   },
   {
     "Username": "Roy",
+    "Email": "roy@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "Roy",
@@ -211,6 +217,7 @@
   },
   {
     "Username": "Duke",
+    "Email": "duke@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "Duke",
@@ -246,6 +253,7 @@
   },
   {
     "Username": "Lloyd",
+    "Email": "lloyd@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "Lloyd",
@@ -281,6 +289,7 @@
   },
   {
     "Username": "Larsen",
+    "Email": "larsen@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "Larsen",
@@ -316,6 +325,7 @@
   },
   {
     "Username": "Simon",
+    "Email": "simon@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "Simon",
@@ -346,6 +356,7 @@
 
   {
     "Username": "mark",
+    "Email": "mark@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "mark",
@@ -363,6 +374,7 @@
 
   {
     "Username": "tom",
+    "Email": "tom@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "tom",
@@ -380,6 +392,7 @@
   },
   {
     "Username": "byron",
+    "Email": "byron@test.com",
     "Gender": "male",
     "Password": "P@ssw0rd",
     "KnownAs": "byron",
