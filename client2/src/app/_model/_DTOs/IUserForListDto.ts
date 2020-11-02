@@ -1,11 +1,11 @@
 export interface IUserForListDto {
-    Id: number;
-    Email: String;
-    Username: String;
-    Gender: String;
-    KnownAs: String;
-    LastActive: Date;
-    AvgStar: number;
-    TotalStars: number;
-    PhotoUrl: String;
+  Id: number;
+  Email: string;
+  Username: string;
+  Gender: string;
+  KnownAs: string;
+  LastActive: Date;
+  AvgStar: number;
+  TotalStars: number;
+  PhotoUrl: string;
 }

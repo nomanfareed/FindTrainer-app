@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Self } from '@angular/core';
+import { NgControl } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-date-input',
   templateUrl: './date-input.component.html',
-  styleUrls: ['./date-input.component.css']
+  styleUrls: ['./date-input.component.css'],
 })
-export class DateInputComponent implements OnInit {
+export class DateInputComponent {
+  @Input() label: string;
+  @Input() maxDate: Date;
+  bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(@Self() public ngControl: NgControl) {
+    this.ngControl.valueAccessor = this;
+    this.bsConfig = {
+      dateInputFormat: 'DD MMMM YYYY',
+    };
   }
 
+  writeValue(obj: any): void {}
+
+  registerOnChange(fn: any): void {}
+
+  registerOnTouched(fn: any): void {}
 }

@@ -46,7 +46,7 @@ import { DashboardAdminReviewsComponent } from './pages/dashboard/dashboard-admi
 import { DashboardAdminStatsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-stats/dashboard-admin-stats.component';
 //Others
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown/ng-multiselect-dropdown.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HttpClientModule } from '@angular/common/http';
 import { RatingModule } from 'ngx-bootstrap/rating'; //Ngx-bootstrap
 import { NgxSpinnerModule } from 'ngx-spinner/lib/ngx-spinner.module';

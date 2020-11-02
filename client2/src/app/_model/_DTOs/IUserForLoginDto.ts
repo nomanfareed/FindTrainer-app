@@ -1,4 +1,4 @@
 export interface IUserForLoginDto {
-    Email: String;
-    Password: String;
+  Email: string;
+  Password: string;
 }

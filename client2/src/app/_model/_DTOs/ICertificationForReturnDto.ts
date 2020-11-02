@@ -1,6 +1,6 @@
 export interface ICertificationForReturnDto {
-    Description: String;
-    Title: String;
-    Created: Date;
-    Id: number;
+  Description: string;
+  Title: string;
+  Created: Date;
+  Id: number;
 }

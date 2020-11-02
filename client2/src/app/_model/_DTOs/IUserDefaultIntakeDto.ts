@@ -1,11 +1,11 @@
 export interface IUserDefaultIntakeDto {
-    Gender: String;
-    Focus: String[];
-    KnownAs: String;
-    IsTrainer: boolean;
-    Country: String;
-    City: String;
-    Province: String;
-    Address: String;
-    Introduction: String;
+  Gender: string;
+  Focus: String[];
+  KnownAs: string;
+  IsTrainer: boolean;
+  Country: string;
+  City: string;
+  Province: string;
+  Address: string;
+  Introduction: string;
 }

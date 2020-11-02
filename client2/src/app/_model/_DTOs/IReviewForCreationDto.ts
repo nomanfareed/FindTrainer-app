@@ -1,5 +1,5 @@
 export interface IReviewForCreationDto {
-    Content: String;
-    Stars: number;
-    RecieverId: number;
+  Content: string;
+  Stars: number;
+  RecieverId: number;
 }

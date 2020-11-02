@@ -1,15 +1,15 @@
 export interface IUserForRegisterDto {
-    Email: String;
-    Password: String;
-    Created: Date;
-    LastActive: Date;
-    Gender: String;
-    Focus: String[];
-    KnownAs: String;
-    IsTrainer: boolean;
-    Country: String;
-    City: String;
-    Province: String;
-    Address: String;
-    Introduction: String;
+  Email: string;
+  Password: string;
+  Created: Date;
+  LastActive: Date;
+  Gender: string;
+  Focus: String[];
+  KnownAs: string;
+  IsTrainer: boolean;
+  Country: string;
+  City: string;
+  Province: string;
+  Address: string;
+  Introduction: string;
 }

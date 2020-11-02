@@ -13,7 +13,7 @@ namespace FindTrainer.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class StatisticsController : ApplicationController
     {
         private readonly ReadOnlyQuery<NewSignup> _newSignupsQuery;
@@ -48,6 +48,7 @@ namespace FindTrainer.Application.Controllers
 
             return Ok(new { SigninCount = count });
         }
+
         [HttpGet("TrainerViews")]
         [Authorize(Roles = "Trainer")]
         public async Task<IActionResult> GetTrainerViews()
