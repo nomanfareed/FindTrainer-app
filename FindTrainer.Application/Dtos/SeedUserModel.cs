@@ -8,7 +8,6 @@ namespace FindTrainer.Application.Dtos
     public class SeedUserModel
     {
         public string Email { get; set; }
-        public string Username { get; set; }
         public virtual IEnumerable<Focus> Focus { get; set; }
         public Gender Gender { get; set; }
         public bool IsTrainer { get; set; }

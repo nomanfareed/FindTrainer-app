@@ -6,7 +6,7 @@ namespace FindTrainer.Application.Dtos
     public class UserForDetailedDto
     {
         public int Id { get; set; }
-        public string Username { get; set; }
+        public string Email { get; set; }
         public IReadOnlyList<string> Focus { get; set; }
         public string Gender { get; set; }
         public string KnownAs { get; set; }
