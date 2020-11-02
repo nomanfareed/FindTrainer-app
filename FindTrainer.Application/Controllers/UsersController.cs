@@ -39,7 +39,26 @@ namespace FindTrainer.Application.Controllers
             var user = await _usersQuery.Get(userId);
             if (user == null)
             {
-                return NotFound("No shuch user with the specified ID");
+                return NotFound("No such trainer exist with the specified ID");
+            }
+
+            if (user.IsTrainer.HasValue && user.IsTrainer.Value)
+            {
+                var dbStats = await _statsRepo.DataSet.FirstOrDefaultAsync(stats => stats.TrainerId == user.Id && 
+                                                                        stats.DateAdded.Date == DateTime.Now.Date);
+                if (dbStats == null)
+                {
+                    await _statsRepo.Add(new UserStats
+                    {
+                        TrainerId = userId,
+                        Counter = 1,
+                        DateAdded = DateTime.Now.Date
+                    });
+                } else
+                {
+                    dbStats.Counter++;
+                    await _statsRepo.SaveChangesAsync();
+                }
             }
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
