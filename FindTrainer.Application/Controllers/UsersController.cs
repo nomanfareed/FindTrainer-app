@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+using System;﻿
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FindTrainer.Application.Dtos;
+using FindTrainer.Domain.Entities;
 using FindTrainer.Domain.Entities.Security;
 using FindTrainer.Persistence.Common;
 using Microsoft.AspNetCore.Authorization;
@@ -19,15 +21,18 @@ namespace FindTrainer.Application.Controllers
         private readonly ReadOnlyQuery<ApplicationUser> _usersQuery;
         private readonly Repository<ApplicationUser> _usersReop;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly Repository<UserStats> _statsRepo;
         private readonly IMapper _mapper;
 
         public UsersController(ReadOnlyQuery<ApplicationUser> usersQuery,
                                Repository<ApplicationUser> usersRepo,
+                               Repository<UserStats> statsRepo,
                                UserManager<ApplicationUser> userManager,
                                IMapper mapper)
         {
             _usersQuery = usersQuery;
             _usersReop = usersRepo;
+            _statsRepo = statsRepo;
             _userManager = userManager;
             _mapper = mapper;
         }
