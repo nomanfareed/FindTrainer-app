@@ -1,0 +1,25 @@
+Create a message feature in the backend where a user can send a message to a trainer. 
+This is only one-way and here is the model for the message.
+
+Receiver Id (trainerid);
+Sender Id (userid);
+content (string);
+title (string);
+email (string);
+phone number (string);
+
+You need to define what kind of relationship this is.
+- Many to many 
+- One to one
+- One to many
+
+**Trainer can't send message to user, user can only send message to trainer
+
+Features:
+- Trainer can get all messages that were sent to the current trainer
+- Trainer can be able to delete messages
+- Admin can see each trainer's messages and delete any messages.
+- User can see all the messages that he or she send.
+- User can delete the messages that he or she send.
+- Messages will be automatically deleted if passed 30 days.
+- User can only send 10 messages in 30 mins.
