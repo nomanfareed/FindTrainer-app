@@ -16,12 +16,15 @@ namespace FindTrainer.Application.Controllers
     {
         private readonly ReadOnlyQuery<NewSignup> _newSignupsQuery;
         private readonly ReadOnlyQuery<UniqueSignin> _signinsQuery;
+        private readonly ReadOnlyQuery<UserStats> _statsQuery;
 
         public StatisticsController(ReadOnlyQuery<NewSignup> newSignupQuery,
-                                    ReadOnlyQuery<UniqueSignin> signinsQuery)
+                                    ReadOnlyQuery<UniqueSignin> signinsQuery,
+                                    ReadOnlyQuery<UserStats> statsQuery)
         {
             _newSignupsQuery = newSignupQuery;
             _signinsQuery = signinsQuery;
+            _statsQuery = statsQuery;
         }
 
 
