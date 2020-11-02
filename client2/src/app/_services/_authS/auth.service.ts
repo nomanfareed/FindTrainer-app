@@ -1,5 +1,8 @@
+import { IUserForDetailedDto } from './../../_model/_DTOs/IUserForDetailedDto';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+import { IUserForLoginDto } from 'src/app/_model/_DTOs/IUserForLoginDto';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -7,18 +10,17 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<User>(null);
+  private currentUserSource = new ReplaySubject<IUserForDetailedDto>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private presence: PresenceService) {}
+  constructor(private http: HttpClient) {}
 
-  login(model: any) {
+  login(model: IUserForLoginDto) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
           this.setCurrentUser(user);
-          this.presence.createHubConnection(user);
         }
       })
     );
@@ -29,7 +31,6 @@ export class AuthService {
       map((user: User) => {
         if (user) {
           this.setCurrentUser(user);
-          this.presence.createHubConnection(user);
         }
       })
     );
@@ -46,7 +47,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-    this.presence.stopHubConnection();
   }
 
   getDecodedToken(token) {

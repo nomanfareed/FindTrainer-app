@@ -1,7 +1,7 @@
 export interface IReviewForListDto {
-    SenderId: number;
-    SenderName: String;
-    Content: String;
-    Stars: number;
-    CreatedDate: Date;
+  SenderId: number;
+  SenderName: string;
+  Content: string;
+  Stars: number;
+  CreatedDate: Date;
 }

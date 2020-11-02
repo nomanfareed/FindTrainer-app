@@ -1,5 +1,5 @@
 export interface IPhotoForCreationDto {
-    Url: String;
-    PublicId: String;
-    File: File;
+  Url: string;
+  PublicId: string;
+  File: File;
 }
