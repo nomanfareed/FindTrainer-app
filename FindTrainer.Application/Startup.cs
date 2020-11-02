@@ -52,8 +52,9 @@ namespace FindTrainer.Application
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = false;
+                options.User.AllowedUserNameCharacters = "";
                 options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
                 options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider;
 
@@ -172,7 +173,8 @@ namespace FindTrainer.Application
                     Gender = user.Gender,
                     IsTrainer = user.IsTrainer,
                     Introduction = user.Introduction,
-                    UserName = user.Username,
+                    Email = user.Email,
+                    UserName = user.Email,
                     KnownAs = user.KnownAs,
                 };
 
@@ -189,7 +191,7 @@ namespace FindTrainer.Application
 
                 var usersRepo = (Repository<ApplicationUser>)_serviceProvider.GetService(typeof(Repository<ApplicationUser>));
 
-                ApplicationUser userToUpdate = await usersRepo.DataSet.Where(x => x.UserName == user.Username)
+                ApplicationUser userToUpdate = await usersRepo.DataSet.Where(x => x.Email == user.Email)
                                                                  .Include(x => x.Address)
                                                                  .Include(x => x.Photo)
                                                                  .Include(x => x.Certifications)
@@ -223,10 +225,11 @@ namespace FindTrainer.Application
 
             await _userManager.CreateAsync(new ApplicationUser()
             {
-                UserName = "Admin"
+                Email = "admin@test.com",
+                UserName = "admin@test.com"
             }, "P@ssw0rd");
 
-            var admin = await _userManager.FindByNameAsync("Admin");
+            var admin = await _userManager.FindByEmailAsync("admin@test.com");
             await _userManager.AddToRoleAsync(admin, Constants.Roles.Admin);
         }
 
