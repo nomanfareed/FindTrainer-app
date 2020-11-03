@@ -9,6 +9,7 @@ import { BaseUserUpdateForReturn } from 'src/app/_model/_DTOs/IUserUpdate';
 export class DashboardUserAccountComponent implements OnInit {
   BaseUserAccountData: BaseUserUpdateForReturn = new BaseUserUpdateForReturn();
   constructor() {}
+  ProfileImage: string = null;
 
   ngOnInit(): void {}
   ChangeProfileImage($event) {

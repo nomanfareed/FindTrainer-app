@@ -12,10 +12,15 @@
       </div>
     </div>
     <div class="col-5">
-      <app-image-upload-form
-        [label]="'Change Profile Image'"
-        (photoSubmit)="ChangeProfileImage($event)"
-      ></app-image-upload-form>
+      <div class="card" style="width: 18rem; height: 25rem">
+        <img class="card-img-top" [src]="ProfileImage" alt="Profile Image" />
+        <div class="card-body">
+          <app-image-upload-form
+            [label]="'Change Profile Image'"
+            (photoSubmit)="ChangeProfileImage($event)"
+          ></app-image-upload-form>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">

@@ -12,6 +12,7 @@ import {
 export class DashboardTrainerAccountComponent implements OnInit {
   BaseUserAccountData: BaseUserUpdateForReturn = new BaseUserUpdateForReturn();
   TrainerAccountData: TrainerUpdateForReturn = new TrainerUpdateForReturn();
+  ProfileImage: string = null;
   constructor() {}
 
   ngOnInit(): void {}
