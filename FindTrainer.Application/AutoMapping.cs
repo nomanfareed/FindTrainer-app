@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FindTrainer.Application.Dtos;
+using FindTrainer.Application.Dtos.UserMessage;
 using FindTrainer.Domain.Entities;
 using FindTrainer.Domain.Entities.Security;
 using System.Linq;
@@ -93,6 +94,37 @@ namespace FindTrainer.Application
             CreateMap<CertificationForCreationDto, Certification>()
                                   .ForMember(dest => dest.Created, opt => opt.Ignore());
             CreateMap<Certification, CertificationForReturnDto>();
+
+            #region userMessages
+
+            CreateMap<UserMessage, UserMessagesDto>()
+                                  .ForMember(dest => dest.CreateDateTime, opt =>
+                                  {
+                                      opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH/mm"));
+                                  })
+                                  .ForMember(dest => dest.IsRead, opt =>
+                                  {
+                                      opt.MapFrom(d => d.VisiteDateTime == null ? false : true);
+                                  })
+                                  .ForMember(dest => dest.TrainerName, opt =>
+                                  {
+                                      opt.MapFrom(d => d.Trainer.KnownAs);
+                                  });
+
+            CreateMap<UserMessage, TrainerMessagesDto>()
+                                  .ForMember(dest => dest.CreateDateTime, opt =>
+                                  {
+                                      opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH/mm"));
+                                  })
+                                  .ForMember(dest => dest.IsNew, opt =>
+                                  {
+                                      opt.MapFrom(d => d.VisiteDateTime == null ? true : false);
+                                  })
+                                  .ForMember(dest => dest.UserName, opt =>
+                                  {
+                                      opt.MapFrom(d => d.User.KnownAs);
+                                  });
+            #endregion
         }
     }
 }

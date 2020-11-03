@@ -37,9 +37,5 @@
     <None Include="Data\UserSeedData.json" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\UserMessage\" />
-  </ItemGroup>
-
 
 </Project>
