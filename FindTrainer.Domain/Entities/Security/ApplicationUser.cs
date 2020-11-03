@@ -8,7 +8,18 @@ namespace FindTrainer.Domain.Entities.Security
 {
     public class ApplicationUser : IdentityUser<int>, IEntity
     {
+
+        public ApplicationUser()
+        {
+            ApplicationUserFocuses = new HashSet<ApplicationUserFocus>();
+            ReceivedMessages = new HashSet<UserMessage>();
+            SentMessages = new HashSet<UserMessage>();
+        }
+
         public virtual ICollection<ApplicationUserFocus> ApplicationUserFocuses { get; set; }
+        public virtual ICollection<UserMessage> ReceivedMessages { get; set; }
+        public virtual ICollection<UserMessage> SentMessages { get; set; }
+
         public Gender? Gender { get; set; }
         public bool? IsTrainer { get; set; }
         public string KnownAs { get; set; }
@@ -22,7 +33,7 @@ namespace FindTrainer.Domain.Entities.Security
 
         public virtual ICollection<Review> ReviewsSent { get; set; }
         public virtual ICollection<Review> ReviewsReceived { get; set; }
-        
+
         public virtual ICollection<UserStats> UserStats { get; set; }
 
         public int? PhotoId { get; set; }
