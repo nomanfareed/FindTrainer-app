@@ -46,29 +46,41 @@ import { DashboardAdminStatsComponent } from './pages/dashboard/dashboard-admin/
 import { DashboardAdminCertsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-certs/dashboard-admin-certs.component';
 import { DashboardAdminMessagesComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-messages/dashboard-admin-messages.component';
 import { DashboardAdminReviewsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-reviews/dashboard-admin-reviews.component';
+import { OutsiderComponent } from './pages/outsider/outsider.component';
 
 const routes: Routes = [
-  { path: _landing_route, component: LandingComponent },
-  { path: _login_route, component: LoginComponent },
-  { path: _signup_route, component: SignupComponent },
-  { path: _trainers_route, component: AllTrainerComponent },
   {
-    path: `${_trainers_route}/:id`,
-    component: SingleTrainerComponent,
+    path: '',
+    component: OutsiderComponent,
     children: [
-      { path: '', redirectTo: _trainer_send_message, pathMatch: 'full' },
-      { path: _trainer_send_message, component: SingleTrainerContactComponent },
+      { path: '', redirectTo: _landing_route, pathMatch: 'full' },
+      { path: _landing_route, component: LandingComponent },
+      { path: _login_route, component: LoginComponent },
+      { path: _signup_route, component: SignupComponent },
+      { path: _trainers_route, component: AllTrainerComponent },
       {
-        path: _trainer_certification,
-        component: SingleTrainerCertsComponent,
-      },
-      { path: _trainer_reviews, component: SingleTrainerReviewsComponent },
-      {
-        path: _trainer_write_review,
-        component: SingleTrainerWriteReviewComponent,
+        path: `${_trainers_route}/:id`,
+        component: SingleTrainerComponent,
+        children: [
+          { path: '', redirectTo: _trainer_send_message, pathMatch: 'full' },
+          {
+            path: _trainer_send_message,
+            component: SingleTrainerContactComponent,
+          },
+          {
+            path: _trainer_certification,
+            component: SingleTrainerCertsComponent,
+          },
+          { path: _trainer_reviews, component: SingleTrainerReviewsComponent },
+          {
+            path: _trainer_write_review,
+            component: SingleTrainerWriteReviewComponent,
+          },
+        ],
       },
     ],
   },
+
   //Below Authenticated ONLY ==========================================================
   {
     path: _mainUser_route,

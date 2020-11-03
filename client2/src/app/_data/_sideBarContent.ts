@@ -9,6 +9,7 @@ import {
   _maintrainer_route,
   _mainUser_route,
 } from './_route';
+
 function properURL(role: Role, url: string) {
   if (role === Role.user) {
     return `${_mainUser_route}/${url}`;
@@ -64,6 +65,7 @@ export const _TrainerSideBoard = [
     route: properURL(Role.trainer, _Dashboard_Account_route),
   },
 ];
+
 export const _AdminSideBoard = [
   {
     name: 'Statics',

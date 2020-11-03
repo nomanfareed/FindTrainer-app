@@ -1,1 +1,8 @@
-<p>dashboard-sidebar works!</p>
+<div class="row" *ngIf="data.length > 0">
+  <!-- Your nav is below -->
+
+  <!-- Your nav is above -->
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <ng-content></ng-content>
+  </main>
+</div>

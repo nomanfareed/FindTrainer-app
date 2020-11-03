@@ -1,0 +1,15 @@
+1. Based on this tutorial: https://www.youtube.com/watch?v=biOMz4puGt8&feature=youtu.be
+I want you to add this responsive and animated responsive siderbar in this component in angular 
+=> FindTrainer-app\client2\src\app\pages\dashboard\dashboard-sidebar
+We have css and html and ts, so make sure to add this features. Inside the Dashboard-sidebar.ts
+we have a variable which is called => data: SidebBarContent[];
+You need to use this as a content of the sidebar, it has a name, icon, and route for where is it going to navigate to
+
+
+2. Based on this tutorial: https://www.youtube.com/watch?v=oLgtucwjVII
+
+I want you to add this responsive top navbar in the => 
+FindTrainer-app\client2\src\app\components\nav\navbar
+
+Make sure that it has all the animation and content that is in the video
+I don't care where they are navigate to, i care more about the design and responsive

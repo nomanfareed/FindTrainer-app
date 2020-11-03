@@ -5,7 +5,7 @@
     "ng": "ng",
     "gc": "git add . && git commit -m 'add auth' && git push .",
     "start": "ng serve --open",
-    "cc": "ng g c pages/dashboard/dashboard-admin/dashboard-admin-stats",
+    "cc": "ng g c pages/outsider",
     "gi": "ng g i _model/Photo --skip-tests --flat ",
     "gint": "ng generate interceptor _interceptor/Error",
     "ccc": "ng g c components/nav/sidebar",

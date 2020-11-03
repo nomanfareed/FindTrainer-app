@@ -1,3 +1,5 @@
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +14,6 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SingleTrainerComponent } from './pages/single-trainer/single-trainer.component';
 import { AllTrainerComponent } from './pages/all-trainer/all-trainer.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardSidebarComponent } from './pages/dashboard/dashboard-sidebar/dashboard-sidebar.component';
 import { DashboardTrainerComponent } from './pages/dashboard/dashboard-trainer/dashboard-trainer.component';
 import { DashboardUserComponent } from './pages/dashboard/dashboard-user/dashboard-user.component';
@@ -27,7 +28,6 @@ import { CertsItemComponent } from './components/items/certs-item/certs-item.com
 import { ReviewItemComponent } from './components/items/review-item/review-item.component';
 import { MessageItemComponent } from './components/items/message-item/message-item.component';
 import { NavbarComponent } from './components/nav/navbar/navbar.component';
-import { SidebarComponent } from './components/nav/sidebar/sidebar.component';
 import { NotFoundComponent } from './pages/error/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/error/server-error/server-error.component';
 import { DashboardTrainerAccountComponent } from './pages/dashboard/dashboard-trainer/dashboard-trainer-account/dashboard-trainer-account.component';
@@ -49,14 +49,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HttpClientModule } from '@angular/common/http';
 import { RatingModule } from 'ngx-bootstrap/rating'; //Ngx-bootstrap
-import { NgxSpinnerModule } from 'ngx-spinner/lib/ngx-spinner.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ImageCropperModule } from 'ngx-image-cropper/lib/image-cropper.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OutsiderComponent } from './pages/outsider/outsider.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +69,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SingleTrainerComponent,
     AllTrainerComponent,
     LandingComponent,
-    DashboardComponent,
     DashboardSidebarComponent,
     DashboardTrainerComponent,
     DashboardUserComponent,
@@ -85,7 +83,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReviewItemComponent,
     MessageItemComponent,
     NavbarComponent,
-    SidebarComponent,
     NotFoundComponent,
     ServerErrorComponent,
     DashboardTrainerAccountComponent,
@@ -102,6 +99,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardAdminMessagesComponent,
     DashboardAdminReviewsComponent,
     DashboardAdminStatsComponent,
+    OutsiderComponent,
   ],
   imports: [
     BrowserModule,

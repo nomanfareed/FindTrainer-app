@@ -1,7 +1,7 @@
 export const _login_route = 'login';
 export const _signup_route = 'signup';
 export const _trainers_route = 'trainers';
-export const _landing_route = '';
+export const _landing_route = 'home';
 
 //Profile Page
 export const _trainer_send_message = 'contact-me';
