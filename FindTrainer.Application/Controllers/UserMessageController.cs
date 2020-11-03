@@ -131,7 +131,7 @@ namespace FindTrainer.Application.Controllers
             var Message = await _userMessageRep.DataSet.FindAsync(messageId);
 
 
-            if(Message != null)
+            if(Message == null)
             {
                 return BadRequest("Could not find a message with this Id");
             }
