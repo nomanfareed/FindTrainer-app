@@ -1,36 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Gender } from 'src/app/_model/_Enum/Gender';
+import { BaseUserUpdateForReturn } from 'src/app/_model/_DTOs/IUserUpdate';
 
 @Component({
   selector: 'app-account-user-form',
   templateUrl: './account-user-form.component.html',
-  styleUrls: ['./account-user-form.component.css']
+  styleUrls: ['./account-user-form.component.css'],
 })
-export class AccountUserFormComponent implements OnInit {
-  @Input() fullData: TrainerDTO | BaseUserDTO;
+export class AccountUserFormComponent {
+  @Input() fullData: BaseUserUpdateForReturn = new BaseUserUpdateForReturn();
+  @Output() submitForm = new EventEmitter();
   AccountForm: FormGroup;
-  initData: UpdateAccountDTO = {
-    name: '',
-    gender: Gender.male,
-  };
 
-  constructor(
-    private userService: UserService,
-    private fb: FormBuilder,
-    private toastr: ToastrService
-  ) {}
-  ngOnChanges() {
+  constructor(private fb: FormBuilder, private toastr: ToastrService) {}
+  ngOnChanges(): void {
     this.initForm();
   }
-  initForm() {
-    if (this.fullData) {
-      Object.assign(this.initData, this.fullData);
-    }
+  initForm(): void {
     this.AccountForm = this.fb.group({
-      name: [this.initData.name, [Validators.required]],
-      gender: [this.initData.gender, [Validators.required]],
+      KnownAs: [this.fullData.KnownAs, [Validators.required]],
+      Gender: [this.fullData.Gender, [Validators.required]],
+      Email: [this.fullData.Email, [Validators.required]],
     });
   }
 
@@ -41,15 +32,7 @@ export class AccountUserFormComponent implements OnInit {
     if (JSON.stringify(oldData) === JSON.stringify(updatedData)) {
       this.toastr.error('Please change the data before save, thanks!');
     } else {
-      this.userService
-        .EditUser(updatedData)
-        .then(() => {
-          this.toastr.info('Account information is saved');
-        })
-        .catch((error) => {
-          this.toastr.error(error.message);
-        });
+      this.submitForm.emit(updatedData);
     }
   }
-
 }

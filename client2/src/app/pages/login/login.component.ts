@@ -1,8 +1,9 @@
-import { AuthService } from './../../_services/_authS/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {
+  IUserForLoginDto,
+  UserForLoginDto,
+} from 'src/app/_model/_DTOs/IUserForLoginDto';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +11,21 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
   isLoading: boolean = false;
+  initData: IUserForLoginDto = new UserForLoginDto();
 
   readonly emailOnly = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   loginForm = this.fb.group({
-    email: [
-      'sdasdasdas@gmail.com',
+    Email: [
+      this.initData.Email,
       [Validators.pattern(this.emailOnly), Validators.required],
     ],
-    password: ['Password123@', [Validators.required]],
+    Password: [this.initData.Password, [Validators.required]],
   });
 
   submitFunc() {
-    const finalData = this.loginForm.value;
+    const finalData: IUserForLoginDto = this.loginForm.value;
   }
 }

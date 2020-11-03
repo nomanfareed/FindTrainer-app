@@ -1,1 +1,75 @@
-<p>account-trainer-form works!</p>
+<form
+  class="needs-validation"
+  [formGroup]="TrainerFormAccount"
+  (ngSubmit)="submitFunc()"
+>
+  <!-- City -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['City']"
+      [label]="'City'"
+    ></app-text-input>
+  </div>
+  <!-- Country -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['Country']"
+      [label]="'Country'"
+    ></app-text-input>
+  </div>
+  <!-- Province -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['Province']"
+      [label]="'Province'"
+    ></app-text-input>
+  </div>
+  <!-- FullAddress -->
+  <div class="mb-3">
+    <app-text-input
+      [formControl]="TrainerFormAccount.controls['FullAddress']"
+      [label]="'Full Address'"
+    ></app-text-input>
+  </div>
+  <!-- OnlineTraining -->
+  <div class="mb-3">
+    <label>Online Training</label>
+    <select
+      class="custom-select"
+      [ngClass]="{
+        'is-invalid':
+          TrainerFormAccount.get('OnlineTraining').errors &&
+          TrainerFormAccount.get('OnlineTraining').touched
+      }"
+      formControlName="OnlineTraining"
+    >
+      <option disabled>Do you offer online Personal Training?</option>
+      <option [ngValue]="true">Yes</option>
+      <option [ngValue]="false">No</option>
+    </select>
+    <div class="invalid-feedback">Please enter a valid option</div>
+  </div>
+  <!-- Focus -->
+  <app-multi-select
+    [dataArr]="dataArr"
+    [existedArr]="fullData.Focus"
+    [limit]="5"
+    [label]="'Focus'"
+    (deselectFunction)="deselect($event)"
+    (selectFunction)="select($event)"
+  ></app-multi-select>
+  <!-- Introduction -->
+  <app-text-area
+    [formControl]="TrainerFormAccount.controls['Introduction']"
+    [label]="'Introduction'"
+  >
+  </app-text-area>
+  <hr class="mb-4" />
+  <button
+    class="btn btn-lg btn-block btn-warning"
+    [disabled]="!TrainerFormAccount.valid"
+    type="submit"
+  >
+    Save
+  </button>
+</form>

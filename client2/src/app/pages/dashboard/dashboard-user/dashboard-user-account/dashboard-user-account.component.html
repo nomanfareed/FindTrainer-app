@@ -4,12 +4,18 @@
       <div class="card">
         <div class="card-header"><b>My Account</b></div>
         <div class="card-body">
-          <!-- <app-account-user-form [fullData]="userData"></app-account-user-form> -->
+          <app-account-user-form
+            [fullData]="BaseUserAccountData"
+            (submitForm)="ChangeAccountSetting($event)"
+          ></app-account-user-form>
         </div>
       </div>
     </div>
     <div class="col-5">
-      <!-- <app-image-upload-form [fullData]="userData"></app-image-upload-form> -->
+      <app-image-upload-form
+        [label]="'Change Profile Image'"
+        (photoSubmit)="ChangeProfileImage($event)"
+      ></app-image-upload-form>
     </div>
   </div>
 </div>
