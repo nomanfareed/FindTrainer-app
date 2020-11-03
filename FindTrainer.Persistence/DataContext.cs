@@ -18,6 +18,7 @@ namespace FindTrainer.Persistence
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+
         public DbSet<ApplicationUserFocus> ApplicationUserFocuses { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Review> Reviews { get; set; }
