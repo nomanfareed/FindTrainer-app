@@ -21,5 +21,7 @@ namespace FindTrainer.Application
             public const string Admin = "Admin";
         }
 
+         public static int MessagesLifeSpan = 30;
+
     }
 }

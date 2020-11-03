@@ -59,6 +59,11 @@ namespace FindTrainer.Persistence.Common
             await _dbSet.AddAsync(record);
         }
 
+        public void Update(TEntity record)
+        {
+            _context.Entry(record).State = EntityState.Modified;
+        }
+
         public async Task<bool> Delete(int id)
         {
             TEntity record = await Get(id);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FindTrainer.Domain.Exceptions;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace FindTrainer.Application.Middleware
             catch (Exception ex)
             {
                 HandleExceptionAsync(context, ex);
+                throw new GlobalException(ex);
             }
         }
 

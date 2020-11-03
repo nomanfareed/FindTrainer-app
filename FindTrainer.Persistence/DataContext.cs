@@ -31,6 +31,7 @@ namespace FindTrainer.Persistence
         public DbSet<UniqueSignin> UniqueSignins { get; set; }
         
         public DbSet<UserStats> UserStats { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -112,6 +113,30 @@ namespace FindTrainer.Persistence
             
             builder.Entity<UserStats>().ToTable("UserStats").Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Entity<ApplicationUser>().HasMany(x => x.UserStats).WithOne(x => x.User).HasForeignKey(x => x.TrainerId);
+
+
+            #region userMessages
+
+            builder.Entity<UserMessage>().Property(x => x.Title).IsRequired();
+            builder.Entity<UserMessage>().Property(x => x.Title).HasMaxLength(120);
+            builder.Entity<UserMessage>().Property(x => x.Content).IsRequired();
+            builder.Entity<UserMessage>().Property(x => x.Content).HasMaxLength(800);
+            builder.Entity<UserMessage>().Property(x => x.Email).HasMaxLength(120);
+            builder.Entity<UserMessage>().Property(x => x.PhoneNumber).HasMaxLength(20);
+            builder.Entity<UserMessage>().Property(x => x.CreateDateTime).IsRequired();
+            builder.Entity<UserMessage>().Property(x => x.ExpireDateTime).IsRequired();
+
+            builder.Entity<UserMessage>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.SentMessages)
+                .HasForeignKey(x => x.UserId);
+
+            builder.Entity<UserMessage>()
+                .HasOne(x => x.Trainer)
+                .WithMany(x => x.ReceivedMessages)
+                .HasForeignKey(x => x.TrainerId);
+
+            #endregion
         }
 
 
