@@ -100,7 +100,7 @@ namespace FindTrainer.Application
             CreateMap<UserMessage, UserMessagesDto>()
                                   .ForMember(dest => dest.CreateDateTime, opt =>
                                   {
-                                      opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH/mm"));
+                                      opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH:mm"));
                                   })
                                   .ForMember(dest => dest.IsRead, opt =>
                                   {
@@ -114,7 +114,7 @@ namespace FindTrainer.Application
             CreateMap<UserMessage, TrainerMessagesDto>()
                                   .ForMember(dest => dest.CreateDateTime, opt =>
                                   {
-                                      opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH/mm"));
+                                      opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH:mm"));
                                   })
                                   .ForMember(dest => dest.IsNew, opt =>
                                   {

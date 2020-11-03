@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FindTrainer.Application.Dtos.UserMessage;
 using AutoMapper;
+using FindTrainer.Domain.Entities.Security;
 
 namespace FindTrainer.Application.Controllers
 {
@@ -20,21 +21,33 @@ namespace FindTrainer.Application.Controllers
     {
         private readonly Repository<UserMessage> _userMessageRep;
         private readonly ReadOnlyQuery<UserMessage> _userMessageQuery;
+        private readonly ReadOnlyQuery<ApplicationUser> _userQuery;
         private readonly IMapper _mapper;
 
-        public UserMessageController(ReadOnlyQuery<UserMessage> userMessageQuery, Repository<UserMessage> userMessageRep)
+        public UserMessageController(ReadOnlyQuery<UserMessage> userMessageQuery, Repository<UserMessage> userMessageRep , ReadOnlyQuery<ApplicationUser> userQuery, IMapper mapper)
         {
+            _mapper = mapper;
+            _userQuery = userQuery;
             _userMessageQuery = userMessageQuery;
             _userMessageRep = userMessageRep;
         }
 
 
 
-        [HttpPost]
+        [HttpPost("SendMessage")]
+        //[AllowAnonymous()]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> SendMessage(UserMessageCreationDto message)
+        public async Task<IActionResult> SendMessage([FromBody] UserMessageCreationDto message)
         {
             var userId = this.CurrentUserId;
+
+            var trainer = await _userQuery.Get(message.TrainerId);
+
+            if(trainer == null || trainer.IsTrainer == false)
+            {
+                return BadRequest("user can only send message to trainer");
+            }
+
 
             var model = new UserMessage
             {
@@ -43,7 +56,8 @@ namespace FindTrainer.Application.Controllers
                 CreateDateTime = DateTime.Now,
                 Title = message.Title,
                 Content = message.Content,
-                TrainerId = message.TrainerId
+                TrainerId = message.TrainerId,
+                UserId = userId
             };
 
             await _userMessageRep.Add(model);
@@ -62,16 +76,16 @@ namespace FindTrainer.Application.Controllers
             }
 
             int skip = (pageNumber - 1) * pageSize;
-            var trainerMessages = _userMessageQuery.Query.Where(x => x.UserId == this.CurrentUserId).Include(i => i.User).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize);
+            var trainerMessages = await _userMessageQuery.Query.Where(x => x.TrainerId == this.CurrentUserId).Include(i => i.User).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize).ToListAsync();
 
 
             var messageToReturn = _mapper.Map<IEnumerable<TrainerMessagesDto>>(trainerMessages);
 
             // Update visit dateTime
-            foreach (var item in trainerMessages)
+            foreach (var item in trainerMessages.Where(i => i.VisiteDateTime == null).ToList())
             {
                 item.VisiteDateTime = DateTime.Now;
-                _userMessageRep.DataSet.Update(item);
+                _userMessageRep.Update(item);
             }
 
             await _userMessageRep.SaveChangesAsync();
@@ -81,9 +95,10 @@ namespace FindTrainer.Application.Controllers
 
         [HttpGet("SentMessages")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetCurrentUserMessages(int currentPage, int pageSize)
+        public async Task<IActionResult> GetCurrentUserMessages(int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
         {
-            var userMessages = await _userMessageQuery.Query.Where(x => x.UserId == this.CurrentUserId).Include(i => i.Trainer).OrderByDescending(i => i.Id).Skip(pageSize * currentPage).Take(pageSize).ToListAsync();
+            int skip = (pageNumber - 1) * pageSize;
+            var userMessages = await _userMessageQuery.Query.Where(x => x.UserId == this.CurrentUserId).Include(i => i.Trainer).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize).ToListAsync();
 
 
             var messageToReturn = _mapper.Map<IEnumerable<UserMessagesDto>>(userMessages);
@@ -95,9 +110,11 @@ namespace FindTrainer.Application.Controllers
 
         [HttpGet("TrainerMessages")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetTrainerMessages(int trainerId, int currentPage, int pageSize)
+        public async Task<IActionResult> GetTrainerMessages(int trainerId, int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
         {
-            var trainerMessages = await _userMessageQuery.Query.Where(x => x.TrainerId == this.CurrentUserId).Include(i => i.User).OrderByDescending(i => i.Id).Skip(pageSize * currentPage).Take(pageSize).ToListAsync();
+            int skip = (pageNumber - 1) * pageSize;
+
+            var trainerMessages = await _userMessageQuery.Query.Where(x => x.TrainerId == trainerId).Include(i => i.User).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize).ToListAsync();
 
 
             var messageToReturn = _mapper.Map<IEnumerable<TrainerMessagesDto>>(trainerMessages);
