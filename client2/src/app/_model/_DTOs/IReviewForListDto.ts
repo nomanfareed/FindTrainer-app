@@ -1,5 +1,5 @@
 export interface IReviewForListDto {
-  SenderId: number;
+  SenderId: string;
   SenderName: string;
   Content: string;
   Stars: number;

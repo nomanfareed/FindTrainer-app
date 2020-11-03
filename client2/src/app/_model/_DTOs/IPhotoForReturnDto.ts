@@ -1,4 +1,4 @@
 export interface IPhotoForReturnDto {
-  Id: number;
+  Id: string;
   Url: string;
 }

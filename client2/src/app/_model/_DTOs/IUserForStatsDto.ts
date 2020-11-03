@@ -1,5 +1,5 @@
 export interface IUserForStatsDto {
-    ViewDate: Date;
-    Count: number;
-    TrainerId: number;
+  ViewDate: Date;
+  Count: number;
+  TrainerId: string;
 }

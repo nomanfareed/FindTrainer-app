@@ -1,5 +1,5 @@
 export interface IUserForListDto {
-  Id: number;
+  Id: string;
   Email: string;
   Gender: string;
   KnownAs: string;
