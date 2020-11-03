@@ -1,0 +1,5 @@
+Once you complete the message feature, i want you to create a feature for trainer to track
+how many messages does he receive in the past 7 days. Make sure to create a way to track how many messages each day
+ONLY for 7 days. It will be very similar to GetTrainerViews in the Statistics Controller.
+
+Once this is done, please refactor the code and the code reuseable.
