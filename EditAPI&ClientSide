@@ -1,0 +1,22 @@
+1. If User has a property isTrainer == true then this user can only create   max 5 ApplicationUserFocuses.
+
+2. If User has a property isTrainer == true then this user can't write a review and can't write a message
+
+3. If User has a property isTrainer == false then this user can't write a review to the same person more than once, and this user can't message the same person more than once
+
+4. If User has a property isTrainer == false, then this user can only write review and message to users who has a property isTrainer == true.
+
+5. If User has a property isTrainer == false, THEN they can only change the following:
+  Email: string = null;
+  Gender: Gender = Gender.male;
+  KnownAs: string = null;
+
+
+6. Please read comments on FindTrainer-app\client2\src\app\_model\_DTOs\IReviewForUpdateDto.ts and create those routes and dtos in the backend to
+return a list of data that is similar to those 2 interfaces that i created, make sure to add authorization, and make sure that the client can send request
+in the FindTrainer-app\client2\src\app\_services\_reviewsS Folder to the backend for requesting those information
+
+
+Add Error handling in the angular http interceptor and combine that with the backend error handling.
+
+7. 

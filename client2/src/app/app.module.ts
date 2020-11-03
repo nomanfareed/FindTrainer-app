@@ -56,6 +56,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OutsiderComponent } from './pages/outsider/outsider.component';
+import { RatingComponent } from './components/items/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { OutsiderComponent } from './pages/outsider/outsider.component';
     DashboardAdminReviewsComponent,
     DashboardAdminStatsComponent,
     OutsiderComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,

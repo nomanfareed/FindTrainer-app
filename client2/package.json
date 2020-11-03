@@ -8,7 +8,7 @@
     "cc": "ng g c pages/outsider",
     "gi": "ng g i _model/Photo --skip-tests --flat ",
     "gint": "ng generate interceptor _interceptor/Error",
-    "ccc": "ng g c components/nav/sidebar",
+    "ccc": "ng g c components/items/rating",
     "cs": "ng g s _services/_others/Busy",
     "cm": "ng g m app-routing --flat --module=app",
     "cg": "ng g guard _guard/trainer",
