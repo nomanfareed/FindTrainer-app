@@ -1,1 +1,34 @@
-<p>dashboard-trainer-account works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-7">
+      <div class="card">
+        <div class="card-header"><b>My Account</b></div>
+        <div class="card-body">
+          <app-account-user-form
+            [fullData]="BaseUserAccountData"
+            (submitForm)="ChangeAccountSetting($event)"
+          ></app-account-user-form>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <app-image-upload-form
+        [label]="'Change Profile Image'"
+        (photoSubmit)="ChangeProfileImage($event)"
+      ></app-image-upload-form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-7">
+      <div class="card">
+        <div class="card-header"><b>Personal Trainer Account</b></div>
+        <div class="card-body">
+          <app-account-trainer-form
+            [fullData]="TrainerAccountData"
+            (submitForm)="ChangeTrainerAccount($event)"
+          ></app-account-trainer-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
