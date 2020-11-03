@@ -73,21 +73,21 @@ export const _AdminSideBoard = [
   {
     name: 'Certifications',
     icon: 'fas fa-school',
-    route: properURL(Role.trainer, _Dashboard_Certs_route),
+    route: properURL(Role.admin, _Dashboard_Certs_route),
   },
   {
     name: 'Messages',
     icon: 'fas fa-envelope',
-    route: properURL(Role.trainer, _Dashboard_Messages_route),
+    route: properURL(Role.admin, _Dashboard_Messages_route),
   },
   {
     name: 'Reviews',
     icon: 'fas fa-star',
-    route: properURL(Role.trainer, _Dashboard_Review_route),
+    route: properURL(Role.admin, _Dashboard_Review_route),
   },
   {
     name: 'Account',
     icon: 'fas fa-user-circle',
-    route: properURL(Role.trainer, _Dashboard_Account_route),
+    route: properURL(Role.admin, _Dashboard_Account_route),
   },
 ];

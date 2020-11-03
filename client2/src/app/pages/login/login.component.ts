@@ -1,8 +1,8 @@
+import { AuthService } from './../../_services/_authS/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/_services/_authS/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,5 +23,7 @@ export class LoginComponent {
     password: ['Password123@', [Validators.required]],
   });
 
-  submitFunc() {}
+  submitFunc() {
+    const finalData = this.loginForm.value;
+  }
 }

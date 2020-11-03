@@ -1,6 +1,6 @@
 export interface IUserDefaultIntakeDto {
   Gender: string;
-  Focus: String[];
+  Focus: string[];
   KnownAs: string;
   IsTrainer: boolean;
   Country: string;

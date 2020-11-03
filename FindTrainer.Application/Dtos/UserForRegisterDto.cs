@@ -15,11 +15,14 @@ namespace FindTrainer.Application.Dtos
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;
 
+        [Required]
         public int Gender { get; set; }
         public ICollection<string> Focus { get; set; }
 
+        [Required]
         public string KnownAs { get; set; }
 
+        [Required]
         public bool IsTrainer { get; set; }
 
         public string Country { get; set; }
@@ -29,6 +32,7 @@ namespace FindTrainer.Application.Dtos
         public string Province { get; set; }
 
         public string Address { get; set; }
+        [Required]
         public string Introduction { get; set; }
     }
 }
