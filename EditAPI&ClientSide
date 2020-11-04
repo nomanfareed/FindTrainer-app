@@ -21,12 +21,7 @@
 a log out feature for user to logout in the AuthService and the client components.
 
 7. Please read comments on FindTrainer-app\client2\src\app\_model\_DTOs\IReviewForUpdateDto.ts and create those routes and dtos in the backend to
-return a list of data that is similar to those 2 interfaces that i created, make sure to add authorization, and make sure that the client can send request
-in the FindTrainer-app\client2\src\app\_services\_reviewsS Folder to the backend for requesting those information
-
-
-8. Add https://www.npmjs.com/package/ngx-mat-select-search and replace the current mulitselect from FindTrainer-app\client2\src\app\_form\multi-select, make sure that you 
-are not changing the methods but just a different select input
+return a list of data that is similar to those 2 interfaces that i created
 
 9. I changed the IUserForListDto in the client2 folder, make sure that you change the api and backend dtos and return the data that
 the client2 is looking for. Also I changed the UserParams, make sure to change backend UserParams dto to use it to filter.
