@@ -17,6 +17,13 @@ return a list of data that is similar to those 2 interfaces that i created, make
 in the FindTrainer-app\client2\src\app\_services\_reviewsS Folder to the backend for requesting those information
 
 
-Add Error handling in the angular http interceptor and combine that with the backend error handling.
+7. Add https://www.npmjs.com/package/ngx-mat-select-search and replace the current mulitselect from FindTrainer-app\client2\src\app\_form\multi-select, make sure that you 
+are not changing the methods but just a different select input
 
-7. 
+8. I changed the IUserForListDto in the client2 folder, make sure that you change the api and backend dtos and return the data that
+the client2 is looking for. Also I changed the UserParams, make sure to change backend UserParams dto to use it to filter.
+
+9. Make sure that when client fetch the users or single user. Their propertiy isTrainer must be true, and data from IUserForListDto in client2 folder
+must not be null, 0 is fine.
+
+10. Add Error handling in the angular http interceptor and combine that with the backend error handling.
