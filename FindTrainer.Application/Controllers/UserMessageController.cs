@@ -102,7 +102,7 @@ namespace FindTrainer.Application.Controllers
         }
 
 
-        [HttpGet("TrainerMessages")]
+        [HttpGet("TrainerMessages/{trainerId}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetTrainerMessages(int trainerId ,[FromQuery] UserMessageParams param)
         {
