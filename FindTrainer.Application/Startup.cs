@@ -170,7 +170,7 @@ namespace FindTrainer.Application
                 {
                     AdsBidding = user.AdsBidding,
                     Created = DateTime.Now,
-                    Gender = user.Gender,
+                    Gender = (int)user.Gender,
                     IsTrainer = user.IsTrainer,
                     Introduction = user.Introduction,
                     Email = user.Email,
