@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using FindTrainer.Application.Dtos.UserMessage;
 using AutoMapper;
 using FindTrainer.Domain.Entities.Security;
+using FindTrainer.Persistence.Repositorys;
 
 namespace FindTrainer.Application.Controllers
 {
@@ -19,12 +20,12 @@ namespace FindTrainer.Application.Controllers
 
     public class UserMessageController : ApplicationController
     {
-        private readonly Repository<UserMessage> _userMessageRep;
+        private readonly UserMessageRepository _userMessageRep;
         private readonly ReadOnlyQuery<UserMessage> _userMessageQuery;
         private readonly ReadOnlyQuery<ApplicationUser> _userQuery;
         private readonly IMapper _mapper;
 
-        public UserMessageController(ReadOnlyQuery<UserMessage> userMessageQuery, Repository<UserMessage> userMessageRep , ReadOnlyQuery<ApplicationUser> userQuery, IMapper mapper)
+        public UserMessageController(ReadOnlyQuery<UserMessage> userMessageQuery, UserMessageRepository userMessageRep , ReadOnlyQuery<ApplicationUser> userQuery, IMapper mapper)
         {
             _mapper = mapper;
             _userQuery = userQuery;
@@ -35,7 +36,6 @@ namespace FindTrainer.Application.Controllers
 
 
         [HttpPost("SendMessage")]
-        //[AllowAnonymous()]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> SendMessage([FromBody] UserMessageCreationDto message)
         {
@@ -68,15 +68,9 @@ namespace FindTrainer.Application.Controllers
 
         [HttpGet("Messages")]
         [Authorize(Roles = "Trainer")]
-        public async Task<IActionResult> GetCurrentTrainerMessages(int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
+        public async Task<IActionResult> GetCurrentTrainerMessages([FromQuery] UserMessageParams param)
         {
-            if (pageSize > Constants.Paging.MaxPageSize)
-            {
-                return BadRequest($"The maximum page size is {Constants.Paging.MaxPageSize}");
-            }
-
-            int skip = (pageNumber - 1) * pageSize;
-            var trainerMessages = await _userMessageQuery.Query.Where(x => x.TrainerId == this.CurrentUserId).Include(i => i.User).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize).ToListAsync();
+            var trainerMessages = await _userMessageRep.SortAndFilterMessage(param.SortType , param.titleFilter , param.contentFilter, param.userNameFilter , param.trainerFilter , CurrentUserId , null , param.PageNumber , param.PageSize );
 
 
             var messageToReturn = _mapper.Map<IEnumerable<TrainerMessagesDto>>(trainerMessages);
@@ -95,10 +89,10 @@ namespace FindTrainer.Application.Controllers
 
         [HttpGet("SentMessages")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetCurrentUserMessages(int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
+        public async Task<IActionResult> GetCurrentUserMessages([FromQuery] UserMessageParams param)
         {
-            int skip = (pageNumber - 1) * pageSize;
-            var userMessages = await _userMessageQuery.Query.Where(x => x.UserId == this.CurrentUserId).Include(i => i.Trainer).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize).ToListAsync();
+
+            var userMessages = await _userMessageRep.SortAndFilterMessage(param.SortType, param.titleFilter, param.contentFilter, param.userNameFilter, param.trainerFilter, null , CurrentUserId, param.PageNumber, param.PageSize);
 
 
             var messageToReturn = _mapper.Map<IEnumerable<UserMessagesDto>>(userMessages);
@@ -110,11 +104,10 @@ namespace FindTrainer.Application.Controllers
 
         [HttpGet("TrainerMessages")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetTrainerMessages(int trainerId, int pageNumber, int pageSize = Constants.Paging.DefaultPageSize)
+        public async Task<IActionResult> GetTrainerMessages(int trainerId ,[FromQuery] UserMessageParams param)
         {
-            int skip = (pageNumber - 1) * pageSize;
 
-            var trainerMessages = await _userMessageQuery.Query.Where(x => x.TrainerId == trainerId).Include(i => i.User).OrderByDescending(i => i.Id).Skip(skip).Take(pageSize).ToListAsync();
+            var trainerMessages = await _userMessageRep.SortAndFilterMessage(param.SortType, param.titleFilter, param.contentFilter, param.userNameFilter, param.trainerFilter, trainerId, null, param.PageNumber, param.PageSize);
 
 
             var messageToReturn = _mapper.Map<IEnumerable<TrainerMessagesDto>>(trainerMessages);
@@ -163,60 +156,9 @@ namespace FindTrainer.Application.Controllers
         [Authorize(Roles = "Trainer")]
         public async Task<IActionResult> GetTrainerMessagesLastWeek()
         {
-            return Ok(await GetMessages());
+            return Ok(await _userMessageRep.GetLastWeekMessages(this.CurrentUserId));
         }
 
-        private async Task<int[]> GetMessages()
-        {
-            var Id = this.CurrentUserId;
-
-            int statsDays = 8; int counter = 0;
-            int[] arr = new int[statsDays];
-
-            var prevDate = DateTime.Now.AddDays(-statsDays).Date;
-            var dataQuery = await _userMessageQuery.Query
-                        .Where(x => x.TrainerId == Id && x.CreateDateTime.Date > prevDate)
-                        .GroupBy(grp => grp.CreateDateTime.Date)
-                        .Select(y => new
-                        {
-                            Date = y.Key,
-                            Count = y.Count()
-                        })
-                        .ToListAsync();
-
-            var dateTimes = new List<DateTime>();
-            for (int i = 0; i < statsDays; i++)
-            {
-                dateTimes.Add(DateTime.Now.Date.AddDays(-i));
-            }
-
-            var emptyTableQuery = from dt in dateTimes
-                                  select new
-                                  {
-                                      dt.Date,
-                                      Count = 0
-                                  };
-
-            var result = from e in emptyTableQuery
-                         join data in dataQuery on e.Date equals data.Date into g
-                         from finalData in g.DefaultIfEmpty()
-                         select new
-                         {
-                             TrainerId = CurrentUserId,
-                             ViewDate = e.Date,
-                             Count = finalData == null ? 0 : finalData.Count
-                         };
-
-            result = result.OrderBy(x => x.ViewDate).ToList();
-
-
-            foreach (var item in result)
-            {
-                arr[counter] = item.Count;
-                counter++;
-            }
-
-            return arr;
-        }
+       
     }
 }

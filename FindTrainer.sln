@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8A354837-3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindTrainer.Application", "FindTrainer.Application\FindTrainer.Application.csproj", "{0980AA88-593D-4999-9BC0-0C594F8E76F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindTrainer.Domain", "FindTrainer.Domain\FindTrainer.Domain.csproj", "{91F17F2A-FB0A-43E5-818E-AF1BE894482E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindTrainer.Domain", "FindTrainer.Domain\FindTrainer.Domain.csproj", "{91F17F2A-FB0A-43E5-818E-AF1BE894482E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F29C24F1-2901-49B8-B55D-F37D910EEB97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindTrainer.Persistence", "FindTrainer.Persistence\FindTrainer.Persistence.csproj", "{88B982A9-4E30-4A08-B4CB-C2142A651F93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindTrainer.Persistence", "FindTrainer.Persistence\FindTrainer.Persistence.csproj", "{88B982A9-4E30-4A08-B4CB-C2142A651F93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
