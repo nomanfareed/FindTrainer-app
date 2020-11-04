@@ -102,7 +102,10 @@ namespace FindTrainer.Application
                                   {
                                       opt.MapFrom(d => d.CreateDateTime.ToString("yyyy/MM/ddTHH:mm"));
                                   })
-                                  
+                                  .ForMember(dest => dest.IsRead, opt =>
+                                  {
+                                      opt.MapFrom(d => d.VisiteDateTime != null ? true : false);
+                                  })
                                   .ForMember(dest => dest.TrainerName, opt =>
                                   {
                                       opt.MapFrom(d => d.Trainer.KnownAs);

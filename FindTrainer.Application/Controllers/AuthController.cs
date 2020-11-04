@@ -63,7 +63,7 @@ namespace FindTrainer.Application.Controllers
                 LastActive = DateTime.Now,
                 UserName = input.Email,
                 Email = input.Email,
-                Gender = (Gender)input.Gender,
+                Gender = (int)input.Gender,
                 KnownAs = input.KnownAs,
                 Introduction = input.Introduction,
                 Address = new Address()

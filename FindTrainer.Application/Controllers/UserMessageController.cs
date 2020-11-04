@@ -102,7 +102,7 @@ namespace FindTrainer.Application.Controllers
         }
 
 
-        [HttpGet("TrainerMessages")]
+        [HttpGet("TrainerMessages/{trainerId}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetTrainerMessages(int trainerId ,[FromQuery] UserMessageParams param)
         {
@@ -113,7 +113,7 @@ namespace FindTrainer.Application.Controllers
             var messageToReturn = _mapper.Map<IEnumerable<TrainerMessagesDto>>(trainerMessages);
 
 
-            return Ok(new { trainerMessages });
+            return Ok(new { messageToReturn });
         }
 
         [HttpDelete("Delete/{messageId}")]
