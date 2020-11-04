@@ -13,3 +13,7 @@ FindTrainer-app\client2\src\app\components\nav\navbar
 
 Make sure that it has all the animation and content that is in the video
 I don't care where they are navigate to, i care more about the design and responsive
+
+
+3.  Add https://www.npmjs.com/package/ngx-mat-select-search and replace the current mulitselect from FindTrainer-app\client2\src\app\_form\multi-select, make sure that you 
+are not changing the methods but just a different select input
