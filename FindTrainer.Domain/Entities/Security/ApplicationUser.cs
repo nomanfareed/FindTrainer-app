@@ -20,7 +20,7 @@ namespace FindTrainer.Domain.Entities.Security
         public virtual ICollection<UserMessage> ReceivedMessages { get; set; }
         public virtual ICollection<UserMessage> SentMessages { get; set; }
 
-        public Gender? Gender { get; set; }
+        public Gender Gender { get; set; }
         public bool? IsTrainer { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; }
