@@ -1,29 +1,34 @@
-1. If User has a property isTrainer == true then this user can only create   max 5 ApplicationUserFocuses.
+1. Make sure if User has a property isTrainer == true then this user can only create   max 5 ApplicationUserFocuses.
 
-2. If User has a property isTrainer == true then this user can't write a review and can't write a message
+2. Make sure if User has a property isTrainer == true then this user can't write a review and can't write a message
 
-3. If User has a property isTrainer == false then this user can't write a review to the same person more than once, and this user can't message the same person more than once
+3. Make sure if User has a property isTrainer == false then this user can't write a review to the same person more than once.
 
-4. If User has a property isTrainer == false, then this user can only write review and message to users who has a property isTrainer == true.
+4. Make sure if User has a property isTrainer == false, then this user can only write review and message to users who has a property isTrainer == true ONLY.
 
 5. If User has a property isTrainer == false, THEN they can only change the following:
   Email: string = null;
   Gender: Gender = Gender.male;
   KnownAs: string = null;
+  
+  AND  User has a property isTrainer == false or true can all update their password, to update their password. PasswordUpdateDto should look like this=>
+  currentPassword: string;
+  newPassword: string;
+  if the currentPassword is not valid, then it should update the new password.
 
 
-6. Please read comments on FindTrainer-app\client2\src\app\_model\_DTOs\IReviewForUpdateDto.ts and create those routes and dtos in the backend to
+6. I already created the login and register page in the frontend, make sure that client can send request to backend to get authenticatied and authroized. There should also be 
+a log out feature for user to logout in the AuthService and the client components.
+
+7. Please read comments on FindTrainer-app\client2\src\app\_model\_DTOs\IReviewForUpdateDto.ts and create those routes and dtos in the backend to
 return a list of data that is similar to those 2 interfaces that i created, make sure to add authorization, and make sure that the client can send request
 in the FindTrainer-app\client2\src\app\_services\_reviewsS Folder to the backend for requesting those information
 
 
-7. Add https://www.npmjs.com/package/ngx-mat-select-search and replace the current mulitselect from FindTrainer-app\client2\src\app\_form\multi-select, make sure that you 
+8. Add https://www.npmjs.com/package/ngx-mat-select-search and replace the current mulitselect from FindTrainer-app\client2\src\app\_form\multi-select, make sure that you 
 are not changing the methods but just a different select input
 
-8. I changed the IUserForListDto in the client2 folder, make sure that you change the api and backend dtos and return the data that
+9. I changed the IUserForListDto in the client2 folder, make sure that you change the api and backend dtos and return the data that
 the client2 is looking for. Also I changed the UserParams, make sure to change backend UserParams dto to use it to filter.
-
-9. Make sure that when client fetch the users or single user. Their propertiy isTrainer must be true, and data from IUserForListDto in client2 folder
-must not be null, 0 is fine.
 
 10. Add Error handling in the angular http interceptor and combine that with the backend error handling.
