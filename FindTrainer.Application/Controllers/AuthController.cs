@@ -158,12 +158,12 @@ namespace FindTrainer.Application.Controllers
             }
             var claims = await GetUserClaims(input.Email);
 
-            JwtSecurityToken token = GenerateToken(claims);
+            //JwtSecurityToken token = GenerateToken(claims);
 
             var result = new
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = token.ValidTo
+                token = GenerateToken(claims) //new JwtSecurityTokenHandler().WriteToken(token),
+                // expiration = token.ValidTo
             };
 
             await IncreaseSigninCounter();
@@ -185,19 +185,30 @@ namespace FindTrainer.Application.Controllers
             return claims;
         }
 
-        private JwtSecurityToken GenerateToken(IEnumerable<Claim> claims)
+        private string GenerateToken(IEnumerable<Claim> claims)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecurityKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                claims,
-                expires: DateTime.UtcNow.AddDays(1),
-                signingCredentials: creds
-            );
+            //var token = new JwtSecurityToken(
+            //    _config["Jwt:Issuer"],
+            //    _config["Jwt:Audience"],
+            //    claims,
+            //    expires: DateTime.UtcNow.AddDays(1),
+            //    signingCredentials: creds
+            //);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = creds
+            };
 
-            return token;
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+           // return token;
         }
 
 
