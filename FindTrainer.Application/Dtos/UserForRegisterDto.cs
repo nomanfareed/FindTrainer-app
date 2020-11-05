@@ -8,6 +8,7 @@ namespace FindTrainer.Application.Dtos
     public class UserForRegisterDto
     {
         [Required]
+        [EmailAddress(ErrorMessage = "Please enter valid email address")]
         public string Email { get; set; }
 
         [Required]
