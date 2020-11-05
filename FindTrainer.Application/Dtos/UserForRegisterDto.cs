@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static FindTrainer.Domain.Enums;
 
 namespace FindTrainer.Application.Dtos
 {
@@ -16,7 +17,7 @@ namespace FindTrainer.Application.Dtos
         public DateTime LastActive { get; set; } = DateTime.Now;
 
         [Required]
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
         public ICollection<string> Focus { get; set; }
 
         [Required]
