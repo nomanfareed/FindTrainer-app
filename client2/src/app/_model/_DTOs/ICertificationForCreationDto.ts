@@ -1,5 +1,5 @@
 export interface ICertificationForCreationDto {
   Description: string;
   Title: string;
-  TrainerId: string;
+  TrainerId: number;
 }
