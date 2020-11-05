@@ -17,3 +17,6 @@ export const _api_getTrainerViews = 'statistics/trainerViews';
 export const _api_addReview = 'review/addReview';
 export const _api_deleteReview = 'review/deleteReview';
 export const _api_getReviewsForTrainer = 'review/getReviewsForTrainer';
+
+export const _api_getPhoto = 'photos/getPhoto';
+export const _api_addPhoto = 'photos/add';
