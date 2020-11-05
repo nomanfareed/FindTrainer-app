@@ -47,6 +47,8 @@ import { DashboardAdminCertsComponent } from './pages/dashboard/dashboard-admin/
 import { DashboardAdminMessagesComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-messages/dashboard-admin-messages.component';
 import { DashboardAdminReviewsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-reviews/dashboard-admin-reviews.component';
 import { OutsiderComponent } from './pages/outsider/outsider.component';
+import { AuthGuard } from './_guard/auth.guard';
+import { RoleGuard } from './_guard/role.guard';
 
 const routes: Routes = [
   {
@@ -85,6 +87,7 @@ const routes: Routes = [
   {
     path: _mainUser_route,
     component: DashboardUserComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: _Dashboard_Account_route, pathMatch: 'full' },
       {
@@ -105,27 +108,33 @@ const routes: Routes = [
   {
     path: _maintrainer_route,
     component: DashboardTrainerComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: _Dashboard_Stats_route, pathMatch: 'full' },
       {
         path: _Dashboard_Stats_route,
         component: DashboardTrainerStatsComponent,
+        canActivate: [RoleGuard], data: {role: 'Trainer'}
       },
       {
         path: _Dashboard_Certs_route,
         component: DashboardTrainerCertsComponent,
+        canActivate: [RoleGuard], data: {role: 'Trainer'}
       },
       {
         path: _Dashboard_Messages_route,
         component: DashboardTrainerMessagesComponent,
+        canActivate: [RoleGuard], data: {role: 'Trainer'}
       },
       {
         path: _Dashboard_Review_route,
         component: DashboardTrainerReviewsComponent,
+        canActivate: [RoleGuard], data: {role: 'Trainer'}
       },
       {
         path: _Dashboard_Account_route,
         component: DashboardTrainerAccountComponent,
+        canActivate: [RoleGuard], data: {role: 'Trainer'}
       },
     ],
   },
@@ -133,27 +142,33 @@ const routes: Routes = [
   {
     path: _mainAdmin_Route,
     component: DashboardTrainerComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: _Dashboard_Stats_route, pathMatch: 'full' },
       {
         path: _Dashboard_Stats_route,
         component: DashboardAdminStatsComponent,
+        canActivate: [RoleGuard], data: {role: 'Admin'}
       },
       {
         path: _Dashboard_Account_route,
         component: DashboardAdminAccountComponent,
+        canActivate: [RoleGuard], data: {role: 'Admin'}
       },
       {
         path: _Dashboard_Certs_route,
         component: DashboardAdminCertsComponent,
+        canActivate: [RoleGuard], data: {role: 'Admin'}
       },
       {
         path: _Dashboard_Messages_route,
         component: DashboardAdminMessagesComponent,
+        canActivate: [RoleGuard], data: {role: 'Admin'}
       },
       {
         path: _Dashboard_Review_route,
         component: DashboardAdminReviewsComponent,
+        canActivate: [RoleGuard], data: {role: 'Admin'}
       },
     ],
   },
