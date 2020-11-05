@@ -13,3 +13,7 @@ export const _api_certList = 'cert/list';
 export const _api_newSignUpCounts = 'statistics/newSignupsCount';
 export const _api_signinsCount = 'statistics/signinsCount';
 export const _api_getTrainerViews = 'statistics/trainerViews';
+
+export const _api_addReview = 'review/addReview';
+export const _api_deleteReview = 'review/deleteReview';
+export const _api_getReviewsForTrainer = 'review/getReviewsForTrainer';
