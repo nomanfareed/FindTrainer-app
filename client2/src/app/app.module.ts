@@ -47,7 +47,7 @@ import { DashboardAdminStatsComponent } from './pages/dashboard/dashboard-admin/
 //Others
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RatingModule } from 'ngx-bootstrap/rating'; //Ngx-bootstrap
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -56,7 +56,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OutsiderComponent } from './pages/outsider/outsider.component';
-import { RatingComponent } from './components/items/rating/rating.component';
+import { ErrorInterceptor } from './_interceptor/error.interceptor';
+import { LoaderInterceptorInterceptor } from './_interceptor/loader-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,6 @@ import { RatingComponent } from './components/items/rating/rating.component';
     DashboardAdminReviewsComponent,
     DashboardAdminStatsComponent,
     OutsiderComponent,
-    RatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,7 +127,13 @@ import { RatingComponent } from './components/items/rating/rating.component';
     }),
     NgbModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
