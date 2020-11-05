@@ -28,7 +28,7 @@ namespace FindTrainer.Application.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("{recipientId}")]
+        [HttpPost("AddReview/{recipientId}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> AddReview(ReviewForCreationDto reviewIntake)
         {
@@ -60,7 +60,7 @@ namespace FindTrainer.Application.Controllers
         }
 
 
-        [HttpDelete("{reviewId}")]
+        [HttpDelete("DeleteReview/{reviewId}")]
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
