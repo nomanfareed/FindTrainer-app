@@ -20,3 +20,10 @@ export const _api_getReviewsForTrainer = 'review/getReviewsForTrainer';
 
 export const _api_getPhoto = 'photos/getPhoto';
 export const _api_addPhoto = 'photos/add';
+
+export const _api_sendMessage = 'userMessage/sendMessage';
+export const _api_getCurrentTrainerMessages = 'userMessage/Messages';
+export const _api_getCurrentUserMessages = 'userMessage/SentMessages';
+export const _api_getTrainerMessages = 'userMessage/TrainerMessages';
+export const _api_messagesLastWeek = 'userMessage/MessagesLastWeek';
+export const _api_DeleteMessages = 'userMessage/delete';
