@@ -6,7 +6,7 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { _login_route } from '../_data/_route';
 import { AuthService } from '../_services/_authS/auth.service';

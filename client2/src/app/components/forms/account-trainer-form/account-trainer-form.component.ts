@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { _focus } from 'src/app/_data/_focus';
 import { TrainerUpdateForReturn } from 'src/app/_model/_DTOs/IUserUpdate';
@@ -14,10 +14,11 @@ export class AccountTrainerFormComponent {
   @Output() submitForm = new EventEmitter();
   TrainerFormAccount: FormGroup;
   dataArr = _focus;
-
-  constructor(private fb: FormBuilder, private toastS: ToastrService) {}
-  ngOnChanges(): void {
+  constructor(private fb: FormBuilder, private toastS: ToastrService) {
     this.initForm();
+
+   }
+  ngOnChanges(): void {
   }
   initForm(): void {
     this.TrainerFormAccount = this.fb.group({

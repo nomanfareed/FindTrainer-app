@@ -56,6 +56,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OutsiderComponent } from './pages/outsider/outsider.component';
+import { RatingComponent } from './components/items/rating/rating.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { LoaderInterceptorInterceptor } from './_interceptor/loader-interceptor.interceptor';
 
@@ -102,6 +106,7 @@ import { LoaderInterceptorInterceptor } from './_interceptor/loader-interceptor.
     DashboardAdminReviewsComponent,
     DashboardAdminStatsComponent,
     OutsiderComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
@@ -126,6 +131,9 @@ import { LoaderInterceptorInterceptor } from './_interceptor/loader-interceptor.
       progressBar: true,
     }),
     NgbModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ],
   providers: [
     {

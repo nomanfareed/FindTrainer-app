@@ -47,6 +47,7 @@ import { DashboardAdminCertsComponent } from './pages/dashboard/dashboard-admin/
 import { DashboardAdminMessagesComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-messages/dashboard-admin-messages.component';
 import { DashboardAdminReviewsComponent } from './pages/dashboard/dashboard-admin/dashboard-admin-reviews/dashboard-admin-reviews.component';
 import { OutsiderComponent } from './pages/outsider/outsider.component';
+import { AccountTrainerFormComponent } from './components/forms/account-trainer-form/account-trainer-form.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { RoleGuard } from './_guard/role.guard';
 
@@ -60,6 +61,7 @@ const routes: Routes = [
       { path: _login_route, component: LoginComponent },
       { path: _signup_route, component: SignupComponent },
       { path: _trainers_route, component: AllTrainerComponent },
+      { path: 'account-trainer', component: AccountTrainerFormComponent },
       {
         path: `${_trainers_route}/:id`,
         component: SingleTrainerComponent,
@@ -182,4 +184,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

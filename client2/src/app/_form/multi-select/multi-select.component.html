@@ -1,6 +1,6 @@
 <form [formGroup]="myForm">
   <label>{{ label | titlecase }}</label>
-  <ng-multiselect-dropdown
+  <!-- <ng-multiselect-dropdown
     [settings]="dropdownSettings"
     [placeholder]="'Select your ' + label"
     [data]="allData"
@@ -10,5 +10,18 @@
     (onSelect)="onItemSelect($event)"
     (onDeSelect)="onItemDeSelect($event)"
   >
-  </ng-multiselect-dropdown>
+  </ng-multiselect-dropdown> -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-select [multiple]="true"  [disabled]="false"
+      (selectionChange)="onItemSelect($event)" #multiSelect [formControl]="myForm.controls[label]">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="filterCtrl" noEntriesFoundLabel="No record found"
+          placeholderLabel="Search">
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let o of filteredDataMulti | async" [value]="o">
+        {{o.item_text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </form>

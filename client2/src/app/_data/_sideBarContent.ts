@@ -23,6 +23,11 @@ function properURL(role: Role, url: string) {
 }
 export const _UserSideboard = [
   {
+    name: 'Trainer Account',
+    icon: 'fa fa-vcard',
+    route: 'account-trainer',
+  },
+  {
     name: 'Account',
     icon: 'fas fa-user-circle',
     route: properURL(Role.user, _Dashboard_Account_route),
