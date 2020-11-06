@@ -3,4 +3,3 @@ export enum Role {
   trainer = 1,
   admin = 2,
 }
-//we have two rules for our users.
